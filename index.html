@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>できる Shadowing 日本語を話そう 中〜上級編</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #e07b39;
+    --bg: #f8f6f0;
+    --card: #ffffff;
+    --border: #ddd;
+    --disk1: #2e6da4;
+    --disk2: #c0392b;
+    --mid: #27ae60;
+    --adv: #8e44ad;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif; background: var(--bg); color: #333; line-height: 1.7; }
+
+  header { background: var(--primary); color: white; padding: 2rem; text-align: center; }
+  header h1 { font-size: 1.8rem; margin-bottom: .4rem; }
+  header p { opacity: .85; font-size: .95rem; }
+
+  nav { background: #122940; display: flex; flex-wrap: wrap; gap: .5rem; padding: .8rem 1.5rem; position: sticky; top: 0; z-index: 100; }
+  nav a { color: #cde; text-decoration: none; font-size: .85rem; padding: .3rem .7rem; border-radius: 4px; }
+  nav a:hover { background: rgba(255,255,255,.15); }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+  section.block { margin-bottom: 2.5rem; }
+  section.block > h2 { font-size: 1.25rem; color: var(--primary); border-left: 5px solid var(--accent); padding: .4rem .8rem; margin-bottom: 1rem; background: #fff; border-radius: 0 6px 6px 0; }
+
+  /* Disk map */
+  .disk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:600px){ .disk-grid { grid-template-columns: 1fr; } }
+  .disk-card { border-radius: 8px; padding: 1.2rem; color: white; }
+  .disk-card.d1 { background: var(--disk1); }
+  .disk-card.d2 { background: var(--disk2); }
+  .disk-card h3 { font-size: 1.1rem; margin-bottom: .6rem; display: flex; align-items: center; gap: .5rem; }
+  .disk-badge { background: rgba(255,255,255,.25); border-radius: 4px; padding: .1rem .5rem; font-size: .8rem; }
+  .disk-card ul { list-style: none; }
+  .disk-card ul li { padding: .25rem 0; border-bottom: 1px solid rgba(255,255,255,.15); font-size: .93rem; }
+  .disk-card ul li:last-child { border: none; }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1rem; }
+  .step-card { background: var(--card); border-radius: 8px; padding: 1.2rem; border: 1px solid var(--border); position: relative; }
+  .step-num { position: absolute; top: -14px; left: 16px; background: var(--accent); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: .85rem; }
+  .step-card h4 { margin-top: .3rem; font-size: 1rem; color: var(--primary); margin-bottom: .5rem; }
+  .step-card p { font-size: .88rem; color: #555; }
+
+  /* Units */
+  .unit-block { background: var(--card); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1.5rem; overflow: hidden; }
+  .unit-header { display: flex; align-items: center; gap: .8rem; padding: .9rem 1.2rem; background: #f0f4f8; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .unit-header h3 { font-size: 1rem; color: var(--primary); }
+  .disk-tag { font-size: .75rem; font-weight: bold; padding: .2rem .6rem; border-radius: 4px; color: white; }
+  .d1-tag { background: var(--disk1); }
+  .d2-tag { background: var(--disk2); }
+  .track-tag { font-size: .75rem; background: #555; color: white; padding: .2rem .6rem; border-radius: 4px; }
+
+  .section-block { padding: .8rem 1.2rem; border-bottom: 1px solid #f0f0f0; }
+  .section-block:last-child { border: none; }
+  .section-label { font-size: .78rem; font-weight: bold; display: inline-block; padding: .15rem .6rem; border-radius: 3px; margin-bottom: .5rem; }
+  .mid-label { background: #e8f8f0; color: var(--mid); }
+  .adv-label { background: #f3eafa; color: var(--adv); }
+
+  .dialogues { display: grid; gap: .6rem; }
+  .dialogue { background: #fafafa; border-radius: 6px; padding: .7rem .9rem; border-left: 3px solid #ccc; }
+  .dialogue.mid { border-left-color: var(--mid); }
+  .dialogue.adv { border-left-color: var(--adv); }
+  .dialogue-num { font-size: .75rem; color: #999; margin-bottom: .2rem; }
+  .line { font-size: .9rem; margin-bottom: .1rem; }
+  .line .speaker { font-weight: bold; color: var(--primary); }
+
+  /* Unit 8 sections */
+  .u8-section { background: #fafafa; border-radius: 6px; padding: .7rem .9rem; border-left: 3px solid var(--accent); margin-bottom: .5rem; }
+  .u8-section h5 { font-size: .9rem; color: #333; margin-bottom: .2rem; }
+  .u8-section p { font-size: .85rem; color: #666; }
+
+  /* Intro box */
+  .intro-box { background: var(--card); border-radius: 8px; padding: 1.3rem; border: 1px solid var(--border); font-size: .9rem; color: #444; }
+  .intro-box p { margin-bottom: .7rem; }
+  .intro-box p:last-child { margin-bottom: 0; }
+
+  /* Features */
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1rem; }
+  .feature-card { background: var(--card); border-radius: 8px; padding: 1.1rem; border: 1px solid var(--border); }
+  .feature-card h4 { font-size: .95rem; color: var(--primary); margin-bottom: .5rem; border-bottom: 1px solid #eee; padding-bottom: .3rem; }
+  .feature-card ul { list-style: disc; padding-left: 1.2rem; font-size: .87rem; color: #555; }
+  .feature-card ul li { margin-bottom: .3rem; }
+
+  footer { text-align: center; padding: 1.5rem; font-size: .8rem; color: #888; background: #f0f0f0; border-top: 1px solid #ddd; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>できる Shadowing 日本語を話そう</h1>
+  <p>中〜上級編　／　斎藤仁志・深澤道子・酒井理恵子・中村雅子・吉本恵子 著　／　くろしお出版</p>
+</header>
+
+<nav>
+  <a href="#intro">はじめに</a>
+  <a href="#disk-map">DISK構成</a>
+  <a href="#about-shadowing">シャドーイングとは</a>
+  <a href="#steps">進め方</a>
+  <a href="#disk1">DISK 1</a>
+  <a href="#disk2">DISK 2</a>
+  <a href="#features">本書の特徴</a>
+</nav>
+
+<div class="container">
+
+  <!-- はじめに -->
+  <section class="block" id="intro">
+    <h2>はじめに</h2>
+    <div class="intro-box">
+      <p>「わかる」けど「できない」という学習者の声をよく耳にします。学習者は日本語が話したい・聞きたいということを強く望んでいます。しかし中級そして上級になるにつれ、多くの授業では日本語能力試験などの試験対策にあてる時間が増え、実際の対人コミュニケーションを練習する場が限られてくる傾向があります。</p>
+      <p>こうした学生や社会の声に応え、「わかる」というレベルを「できる」というレベルまで引っ張り上げるために作成されたのが本書です。本書で練習する「シャドーイング」という方法はもともと同時通訳の訓練方法として行われてきました。</p>
+      <p>本書は、中～上級レベルの日本語学習者がこの練習法に無理なく慣れ、教材の難易度を上げていく中で確実に力をつけていけるように工夫しました。日本語教室で5年以上にわたり、1000人以上の学習者に使われてきたものを修正・改良を加えたものです。</p>
+      <p style="font-size:.85rem;color:#888;">2014年初夏　著者一同</p>
+    </div>
+  </section>
+
+  <!-- DISK構成 -->
+  <section class="block" id="disk-map">
+    <h2>DISK 構成・ユニット一覧</h2>
+    <div class="disk-grid">
+      <div class="disk-card d1">
+        <h3>💿 DISK 1 <span class="disk-badge">Unit 1〜4</span></h3>
+        <ul>
+          <li>Unit 1　家族・夫婦・恋人との会話</li>
+          <li>Unit 2　親しい友人との会話</li>
+          <li>Unit 3　知人や近所の人などとの会話</li>
+          <li>Unit 4　医者や店員などとの会話</li>
+        </ul>
+      </div>
+      <div class="disk-card d2">
+        <h3>💿 DISK 2 <span class="disk-badge">Unit 5〜8</span></h3>
+        <ul>
+          <li>Unit 5　同僚との会話</li>
+          <li>Unit 6　上司や部下との会話</li>
+          <li>Unit 7　社外の人や面接官などとの会話</li>
+          <li>Unit 8　長い会話・スピーチなど</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:1rem; background:white; border-radius:8px; padding:1rem; border:1px solid #ddd; font-size:.9rem; color:#555;">
+      <strong>ページ構成：</strong> CDは2枚。各ユニット1〜7は <strong>セクション1（中級 / N2レベル）</strong> と <strong>セクション2（上級 / N1レベル）</strong> に分かれています。ユニット8は長い会話・スピーチ8つのセクションで構成され、難易度の差はありません。
+    </div>
+  </section>
+
+  <!-- シャドーイングとは -->
+  <section class="block" id="about-shadowing">
+    <h2>シャドーイングとは</h2>
+    <div class="intro-box">
+      <p>シャドーイングとは、流れてくる音声を聞きながら「影」のようにすぐ後ろをできるだけ忠実に声に出して言う練習方法です。古くから同時通訳のための練習法として行われてきました。近年では脳研究が目覚しい勢いで発展し、シャドーイング時の脳内メカニズムが解明され、その効果が確認されています。</p>
+      <p>シャドーイングは聞きながら話す行為であると同時に、話しながら同時に聞きつづけるという行為でもあります。シャドーイングをする際、大きく4つのプロセスを瞬時に行っています。</p>
+      <ol style="padding-left:1.3rem; color:#444; font-size:.9rem;">
+        <li>音声を知覚する（聞き取る）</li>
+        <li>意味内容を理解する</li>
+        <li>意味内容から言語に再構築する</li>
+        <li>発話する</li>
+      </ol>
+      <p style="margin-top:.7rem;">シャドーイングは「わかる」を「できる」にするための練習方法です。同じ会話を毎日繰り返し数週間に渡り使うことで、ナチュラルスピードでも聞き取れ、流暢に復唱できるレベル（運用力レベル）に向上します。</p>
+    </div>
+  </section>
+
+  <!-- シャドーイングの進め方 -->
+  <section class="block" id="steps">
+    <h2>シャドーイングの進め方（STEP 1〜6）</h2>
+    <p style="font-size:.88rem; color:#666; margin-bottom:1rem;">毎日10分程度、1セクションを2〜3週間繰り返し練習。STEP 6「コンテンツシャドーイング」が完全にできるようになったら次のセクションへ。</p>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h4>ユニットとセクションの選択</h4>
+        <p>自分に必要なユニットを自由に選ぶ。「読めば楽々わかるが、すらすら話すのは難しい」レベルが適したセクション。難しすぎないものを選ぶこと。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h4>意味の把握</h4>
+        <p>シャドーイングをする前に音声を聞き、またはスクリプトを読み、会話の内容・個々の言葉の意味・聴き取れない箇所を確認する。会話の場面・人物像・間柄なども考える。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h4>音をつかむ</h4>
+        <p><strong>シンクロ・リーディング：</strong>音声を聞きながらスクリプトを目で追う。まだ何も話さず、聴くことと文字確認に重点を置く。<br><br>
+        <strong>サイレント・シャドーイング：</strong>音声を聞きながら、声に出さず頭の中だけで復唱する。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h4>口を動かす</h4>
+        <p><strong>スクリプト付きシャドーイング：</strong>スクリプトを見ながら音声を聞き、すぐ後を復唱。ナチュラルスピードで言うことが目的。<br><br>
+        <strong>マンブリング：</strong>スクリプトを見ずにブツブツつぶやきながら復唱。口を大きく動かす必要がなく、言いにくい文も復唱しやすくなる。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <h4>プロソディー・シャドーイング</h4>
+        <p>スクリプトを見ずに、音声に忠実にシャドーイング。同じスピード・同じイントネーション・声の強弱（プロミネンス）・間（ポーズ）にも徹底的に忠実に練習する。目標は流暢さ。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">6</div>
+        <h4>コンテンツ・シャドーイング</h4>
+        <p>スクリプトを見ずに、意味内容を意識しながらシャドーイング。STEP5で身につけたイントネーションを崩さず、話し手の心境まで読み取ってシャドーイングする。実際のコミュニケーション場面での使用を意識して練習する。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISK 1 -->
+  <section class="block" id="disk1">
+    <h2>💿 DISK 1　Unit 1〜4 の会話</h2>
+
+    <!-- Unit 1 -->
+    <div class="unit-block">
+      <div class="unit-header">
+        <span class="disk-tag d1-tag">DISK 1</span>
+        <h3>Unit 1　家族・夫婦・恋人との会話</h3>
+        <span class="track-tag">Track 01〜06</span>
+      </div>
+      <div style="padding:.7rem 1.2rem; font-size:.85rem; color:#666; background:#fafafa; border-bottom:1px solid #eee;">
+        このユニットでは、親子や兄弟、夫婦などの会話を練習します。話のトピックは多岐に渡り、自分の本音や気持ちをストレートに表現することが多いでしょう。話すスピードも速く、カジュアルな表現や短縮形が多く使われます。
+      </div>
+
+      <!-- Section 1 -->
+      <div class="section-block">
+        <div class="section-label mid-label">セクション 1　中級レベル　（Track 02〜04）</div>
+        <div class="dialogues">
+          <div class="dialogue mid">
+            <div class="dialogue-num">1</div>
+            <div class="line"><span class="speaker">A：</span>早くかたづけなさい。</div>
+            <div class="line"><span class="speaker">B：</span>わかってるって。今やろうって思ったのに！</div>
+            <div class="line"><span class="speaker">A：</span>いつもそう言うだけじゃない。</div>
+            <div class="line"><span class="speaker">B：</span>だって、いつもそう思ってるときに言うから。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">2</div>
+            <div class="line"><span class="speaker">A：</span>雨降ってきそうだよ。傘持ってったら？</div>
+            <div class="line"><span class="speaker">B：</span>いいよ、めんどくさいし。</div>
+            <div class="line"><span class="speaker">A：</span>ほら、折りたたみだから。</div>
+            <div class="line"><span class="speaker">B：</span>いい、いい。そんなにどしゃぶりにはならないでしょ。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">3</div>
+            <div class="line"><span class="speaker">A：</span>ほら、この人どう？</div>
+            <div class="line"><span class="speaker">B：</span>いやだー。私の趣味じゃない。</div>
+            <div class="line"><span class="speaker">A：</span>でもほら、年収だってこんなにあんのよ。</div>
+            <div class="line"><span class="speaker">B：</span>お金があればいいってもんじゃないでしょ〜。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">4〜5</div>
+            <div class="line"><span class="speaker">A：</span>さすが、一流ホテルだけのことはあるね。</div>
+            <div class="line"><span class="speaker">B：</span>何感心してんの？</div>
+            <div class="line"><span class="speaker">A：</span>見てよ。あのシャンデリアの大きさ！</div>
+            <div class="line"><span class="speaker">B：</span>本当！直径5メートルはあるね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">6（腹痛・テスト）</div>
+            <div class="line"><span class="speaker">A：</span>ぐずぐずしてないでさっさと出かけなさい。</div>
+            <div class="line"><span class="speaker">B：</span>ちょっとおなかが痛くて…。</div>
+            <div class="line"><span class="speaker">A：</span>大丈夫。いつもどおりテストが終われば、すぐ治るから。</div>
+            <div class="line"><span class="speaker">B：</span>違うってば〜。今日は本当に痛いんだよ。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">7（振袖・成人式）</div>
+            <div class="line"><span class="speaker">A：</span>今日はどうして振袖の人が多いんだろ。</div>
+            <div class="line"><span class="speaker">B：</span>何言ってんの。成人式じゃない。</div>
+            <div class="line"><span class="speaker">A：</span>えっ、そうだっけ。</div>
+            <div class="line"><span class="speaker">B：</span>やだー、しっかりしてよ。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">8（目覚まし時計5つ）</div>
+            <div class="line"><span class="speaker">A：</span>先生とクラスメートから誕生日プレゼントもらったよ…。全部で五つ。</div>
+            <div class="line"><span class="speaker">B：</span>そう…だけど、五つももらったにしては元気がないんじゃない？</div>
+            <div class="line"><span class="speaker">A：</span>それがね、五つが五つとも、目覚まし時計だったんだ。少しでも遅刻がなくなるようにってね。</div>
+            <div class="line"><span class="speaker">B：</span>みんな、あんたのことよくわかってるんだね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">9〜10（時間・免許更新）</div>
+            <div class="line"><span class="speaker">A：</span>今何時？</div>
+            <div class="line"><span class="speaker">B：</span>11時。</div>
+            <div class="line"><span class="speaker">A：</span>えっ、もうそんな時間？あ〜あ、一日があっという間に過ぎちゃった…。</div>
+            <div class="line"><span class="speaker">B：</span>グダグダ言ってる暇があったら、さっさとやったら〜？</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">11（数学テスト）</div>
+            <div class="line"><span class="speaker">A：</span>太郎の数学のテストを見て。28点と32点だわ。</div>
+            <div class="line"><span class="speaker">B：</span>50点満点で？</div>
+            <div class="line"><span class="speaker">A：</span>100点満点よ。あなた、本当に楽観的な人ね。</div>
+            <div class="line"><span class="speaker">B：</span>まー、いいじゃないか。かえるの子はかえるだよ。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">12（たかしの熱）</div>
+            <div class="line"><span class="speaker">A：</span>あー、どうしよう！たかしの熱が下がらない！</div>
+            <div class="line"><span class="speaker">B：</span>今日は日曜日だしなー。病院はどこも休みだろう？</div>
+            <div class="line"><span class="speaker">A：</span>ちょっと、区の広報誌持ってきて。</div>
+            <div class="line"><span class="speaker">B：</span>あ、あった、あった。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">13（谷口さんちの年賀状）</div>
+            <div class="line"><span class="speaker">A：</span>谷口さんちからの年賀状きてる？あそこの毎年おもしろいんだよ。</div>
+            <div class="line"><span class="speaker">B：</span>あ、谷口さんって兄妹みたいによく似た夫婦でしょ。</div>
+            <div class="line"><span class="speaker">A：</span>あそこんち、犬もいて、犬まで似てるんだよ。</div>
+            <div class="line"><span class="speaker">B：</span>みんな兄妹だったりして。</div>
+            <div class="line"><span class="speaker">A：</span>それはない！</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="section-block">
+        <div class="section-label adv-label">セクション 2　上級レベル　（Track 05〜06）</div>
+        <div class="dialogues">
+          <div class="dialogue adv">
+            <div class="dialogue-num">1（コーヒー）</div>
+            <div class="line"><span class="speaker">A：</span>コーヒー、いれてくれない？</div>
+            <div class="line"><span class="speaker">B：</span>いいよ、インスタント？それとも豆からひく？</div>
+            <div class="line"><span class="speaker">A：</span>じゃ、せっかくだから豆からひいてもらおうかな。</div>
+            <div class="line"><span class="speaker">B：</span>え、めんどうだなー。インスタントじゃだめ？</div>
+            <div class="line"><span class="speaker">A：</span>だったら、最初から聞くなよ。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">2（胃が痛い・将来）</div>
+            <div class="line"><span class="speaker">A：</span>う〜ん、また胃がシクシク痛み出した。</div>
+            <div class="line"><span class="speaker">B：</span>どうしたの？胃炎？</div>
+            <div class="line"><span class="speaker">A：</span>将来のことを考えはじめると痛くなるんだよ。</div>
+            <div class="line"><span class="speaker">B：</span>このご時勢、もっと図太く生きなきゃ。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">3〜5（彼女との喧嘩）</div>
+            <div class="line"><span class="speaker">A：</span>ちょっと、私、怒ってるんだけど。</div>
+            <div class="line"><span class="speaker">B：</span>え？何でそんなにプンプン怒ってんの？僕、なんか悪いことをした？</div>
+            <div class="line"><span class="speaker">A：</span>ふざけないで！前の彼女とデートしてるの見ちゃったんだから。</div>
+            <div class="line"><span class="speaker">B：</span>あ、あれは偶然会って立ち話してただけだよ。そばにいたなら、声かけてくれればよかったのにー。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">6（おせち）</div>
+            <div class="line"><span class="speaker">A：</span>ねー、もう12月も半ばだし、そろそろおせちのこと考えないとね。</div>
+            <div class="line"><span class="speaker">B：</span>うーん、適当に決めてくれよ。家事は君に任せてあるんだから…。</div>
+            <div class="line"><span class="speaker">A：</span>あ、そう？じゃー、おせちなしっていう選択でもいいわけね。</div>
+            <div class="line"><span class="speaker">B：</span>それを言っちゃ、身もふたもないな。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">7〜8（ウェディングドレス・バーゲン）</div>
+            <div class="line"><span class="speaker">A：</span>ねー、見て、このウェディングドレス。全部手作りのレースだって。すてきね。</div>
+            <div class="line"><span class="speaker">B：</span>うん、すごいね。一つ一つがすごく精巧だし…。気が遠くなるような作業だね。</div>
+            <div class="line"><span class="speaker">A：</span>冬のバーゲンセール、全品9割引？信じられない！</div>
+            <div class="line"><span class="speaker">B：</span>えっ、90%オフだって？それじゃ、店も元取れないよね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">9（選挙）</div>
+            <div class="line"><span class="speaker">A：</span>ねー、お父さん、今度の選挙、誰に入れる？</div>
+            <div class="line"><span class="speaker">B：</span>そうだな、しっかりと国民の声に耳を傾けてくれる人がいいなー。それから、国民のために尽くしてくれる人。</div>
+            <div class="line"><span class="speaker">A：</span>でも、選挙のときはみんなそう言うのよね。</div>
+            <div class="line"><span class="speaker">B：</span>目先の利益に目がくらんで、私腹を肥やすことばかり考えてる政治家は最低だよな。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">10〜11（ファッション・家購入）</div>
+            <div class="line"><span class="speaker">A：</span>その頭、鳥の巣みたいにボサボサじゃないか〜。</div>
+            <div class="line"><span class="speaker">B：</span>そっちこそ、何よ、そのジーンズ。ボロボロじゃない。</div>
+            <div class="line"><span class="speaker">A：</span>家を買うならやっぱり、周りの環境を考えないとね。</div>
+            <div class="line"><span class="speaker">B：</span>そう？私は環境よりむしろ便利さのほうが大切だと思うけどな。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unit 2 -->
+    <div class="unit-block">
+      <div class="unit-header">
+        <span class="disk-tag d1-tag">DISK 1</span>
+        <h3>Unit 2　親しい友人との会話</h3>
+        <span class="track-tag">Track 10〜18</span>
+      </div>
+      <div style="padding:.7rem 1.2rem; font-size:.85rem; color:#666; background:#fafafa; border-bottom:1px solid #eee;">
+        親しい友人同士の会話。タメ口・省略形・感情表現が豊富。テンポが速く、話題が次々と変わる。
+      </div>
+      <div class="section-block">
+        <div class="section-label mid-label">セクション 1　中級レベル　（Track 10〜12）</div>
+        <p style="font-size:.85rem;color:#888;padding:.3rem 0;">※ページ 40〜47 収録。多様な日常会話（買い物・学校・恋愛・体調など）。</p>
+      </div>
+      <div class="section-block">
+        <div class="section-label adv-label">セクション 2　上級レベル　（Track 13〜18）</div>
+        <p style="font-size:.85rem;color:#888;padding:.3rem 0;">※ページ 48〜57 収録。複雑な感情・社会的話題・ユーモアを含む会話。</p>
+      </div>
+    </div>
+
+    <!-- Unit 3 -->
+    <div class="unit-block">
+      <div class="unit-header">
+        <span class="disk-tag d1-tag">DISK 1</span>
+        <h3>Unit 3　知人や近所の人などとの会話</h3>
+        <span class="track-tag">Track 19〜27</span>
+      </div>
+      <div style="padding:.7rem 1.2rem; font-size:.85rem; color:#666; background:#fafafa; border-bottom:1px solid #eee;">
+        顔見知りや近所の人との適度な距離感のある会話。丁寧さとカジュアルさが混在。
+      </div>
+      <!-- Section 1 -->
+      <div class="section-block">
+        <div class="section-label mid-label">セクション 1　中級レベル　（Track 19〜21）</div>
+        <div class="dialogues">
+          <div class="dialogue mid">
+            <div class="dialogue-num">1（新年会）</div>
+            <div class="line"><span class="speaker">A：</span>来週の日曜日、新年会をしようと思うんですけど。</div>
+            <div class="line"><span class="speaker">B：</span>あ、ぜひ参加させてください。楽しみです。</div>
+            <div class="line"><span class="speaker">A：</span>それで、一人一皿、得意な料理を持ってきてほしいんですけど。</div>
+            <div class="line"><span class="speaker">B：</span>わかりました。じゃ、ぎょうざ持っていきます。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">2（ざる豆腐）</div>
+            <div class="line"><span class="speaker">A：</span>このざる豆腐おいしいですね。</div>
+            <div class="line"><span class="speaker">B：</span>本当ですね。このプルプルの食感がたまりませんね。</div>
+            <div class="line"><span class="speaker">A：</span>さすが、豆腐専門レストランですね。豆腐ハンバーグも注文してみましょうか。</div>
+            <div class="line"><span class="speaker">B：</span>いいですね。たまには豆腐づくしもいいもんですね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">3（ため息）</div>
+            <div class="line"><span class="speaker">A：</span>は~。</div>
+            <div class="line"><span class="speaker">B：</span>ため息つくと幸せが逃げていくって言いますよ。</div>
+            <div class="line"><span class="speaker">A：</span>そうなんですけどね。</div>
+            <div class="line"><span class="speaker">B：</span>ほらほら、元気出してくださいよ。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">4（交差点の事故）</div>
+            <div class="line"><span class="speaker">A：</span>またあそこの交差点で事故だそうですよ。</div>
+            <div class="line"><span class="speaker">B：</span>え~、またですか? ついこの間も自転車と車の事故があったばかりですよね。</div>
+            <div class="line"><span class="speaker">A：</span>ええ。ミラーつけるとか、行政に何とかしてほしいですよね。</div>
+            <div class="line"><span class="speaker">B：</span>本当ですよね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">5（モンブラン）</div>
+            <div class="line"><span class="speaker">A：</span>モンブラン、買ってきましたよ。</div>
+            <div class="line"><span class="speaker">B：</span>わー、ありがとうございます。今日もお客さん並んでましたか?</div>
+            <div class="line"><span class="speaker">A：</span>ええ。一日限定50個というのもミソなんですかね。</div>
+            <div class="line"><span class="speaker">B：</span>あそこのモンブラン、味も絶品ですからね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">6（家庭菜園のトマト）</div>
+            <div class="line"><span class="speaker">A：</span>これ、お一ついかが? 家庭菜園でとれたんです。</div>
+            <div class="line"><span class="speaker">B：</span>わー、きれいなトマト。こんなのがうちでできるなんていいですねー。</div>
+            <div class="line"><span class="speaker">A：</span>味は保証できませんが。どうぞ。</div>
+            <div class="line"><span class="speaker">B：</span>じゃ、遠慮なくいただきます。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">7（彼女が怒ってる理由）</div>
+            <div class="line"><span class="speaker">A：</span>どうして彼女が怒ってるわけ?</div>
+            <div class="line"><span class="speaker">B：</span>自分でもよくわからないんだけど、口をきいてくれないんです。</div>
+            <div class="line"><span class="speaker">A：</span>彼女の気に障ることを言ったんじゃない?</div>
+            <div class="line"><span class="speaker">B：</span>う~ん、思い当たることはないんですけど・・・。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">8（夏バテ対策）</div>
+            <div class="line"><span class="speaker">A：</span>夏バテ対策、何かしていますか?</div>
+            <div class="line"><span class="speaker">B：</span>そうですね、うなぎの蒲焼きを食べるとか・・・。</div>
+            <div class="line"><span class="speaker">A：</span>わー、豪華ですね。僕なんか、アイス食べてしのいでるぐらいです。</div>
+            <div class="line"><span class="speaker">B：</span>冷たいものは体にあんまりよくないんだよ。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">9（お土産おいしそう）</div>
+            <div class="line"><span class="speaker">A：</span>さー、どうぞ。熱いうちに召し上がってください。</div>
+            <div class="line"><span class="speaker">B：</span>わー、おいしそう。じゃ、遠慮なくいただきます。</div>
+            <div class="line"><span class="speaker">A：</span>いかがですか?</div>
+            <div class="line"><span class="speaker">B：</span>うーん、やっぱりできたてはおいしいですね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">10（福岡のお土産）</div>
+            <div class="line"><span class="speaker">A：</span>これ、福岡のお土産なんですけど、皆さんで召し上がってください。</div>
+            <div class="line"><span class="speaker">B：</span>あら、ありがとうございます。</div>
+            <div class="line"><span class="speaker">A：</span>地元では有名なお菓子なんです。向こうで食べたんですけど、おいしかったんで・・・。</div>
+            <div class="line"><span class="speaker">B：</span>じゃあ、早速お茶入れて、いただきますね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">11（受験勉強）</div>
+            <div class="line"><span class="speaker">A：</span>いよいよ受験勉強も追い込みですね。</div>
+            <div class="line"><span class="speaker">B：</span>はい。あとがないので、ここで一発決めようと思ってます。</div>
+            <div class="line"><span class="speaker">A：</span>その意気込みなら合格間違いなしですね。頑張ってください。</div>
+            <div class="line"><span class="speaker">B：</span>ありがとうございます。頑張ります。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">12（就職）</div>
+            <div class="line"><span class="speaker">A：</span>卒業後は何をしたいですか?</div>
+            <div class="line"><span class="speaker">B：</span>日本でしばらく仕事をしてみたいんですが...。</div>
+            <div class="line"><span class="speaker">A：</span>外国人の就職はなかなか難しいけど、これをしたいという気持ちがあれば可能性はありますよ。</div>
+            <div class="line"><span class="speaker">B：</span>そうですか・・・。私は一応IT企業を志望しているんですけど。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">13（箱根・温泉）</div>
+            <div class="line"><span class="speaker">A：</span>来週は箱根ですね。箱根に行ったら、温泉たくさん入りたいですね。</div>
+            <div class="line"><span class="speaker">B：</span>ええ。少なくとも5回は入りましょうね。</div>
+            <div class="line"><span class="speaker">A：</span>でも、あんまり入りすぎると湯あたりして体に良くないって言いますよ。</div>
+            <div class="line"><span class="speaker">B：</span>あー、そうなんですか。てっきり体にいいと思ってました。</div>
+            <div class="line"><span class="speaker">A：</span>そうでもないみたいですよ。</div>
+            <div class="line"><span class="speaker">B：</span>何でも過ぎると良くないんでしょうね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">14（松下さんの不幸）</div>
+            <div class="line"><span class="speaker">A：</span>最近、松下さんの姿が見えないけど、どうしたのかしら。</div>
+            <div class="line"><span class="speaker">B：</span>何でも、ご家族にご不幸があったとかで、大変だったみたい。</div>
+            <div class="line"><span class="speaker">A：</span>あら、そうなの。だから、電話しても出なかったのね。</div>
+            <div class="line"><span class="speaker">B：</span>ええ、前はメール入れたらすぐに返事くれたんですけどね。</div>
+            <div class="line"><span class="speaker">A：</span>どなたがお亡くなりになったんでしょうねー。</div>
+            <div class="line"><span class="speaker">B：</span>さー、どなたでしょうかねー。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="section-block">
+        <div class="section-label adv-label">セクション 2　上級レベル　（Track 22〜27）</div>
+        <div class="dialogues">
+          <div class="dialogue adv">
+            <div class="dialogue-num">1（石井さんの隣）</div>
+            <div class="line"><span class="speaker">A：</span>あれっ、石井さんの隣に写ってるこの人、妹さんですか?</div>
+            <div class="line"><span class="speaker">B：</span>いえ、赤の他人ですよ。</div>
+            <div class="line"><span class="speaker">A：</span>へー、他人の空似とは、よく言ったもんですね。</div>
+            <div class="line"><span class="speaker">B：</span>そうですか? そんなに似てますかね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">2（シャドーイング）</div>
+            <div class="line"><span class="speaker">A：</span>もっと会話を勉強したいんです。</div>
+            <div class="line"><span class="speaker">B：</span>どうしてですか? お上手ですよ。</div>
+            <div class="line"><span class="speaker">A：</span>う~ん。でも、聞いてわかっても言いたいことがすぐ言葉にならないんです。</div>
+            <div class="line"><span class="speaker">B：</span>じゃ、だまされたと思って、シャドーイングしてみたらどうですか?</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">3（企業買収）</div>
+            <div class="line"><span class="speaker">A：</span>企業買収って、最近増えてますよね。</div>
+            <div class="line"><span class="speaker">B：</span>そうですね。老舗の企業なんかもどんどん買収の対象になってますしね。</div>
+            <div class="line"><span class="speaker">A：</span>今の時代、地道にやってるだけじゃだめなんでしょうかね。</div>
+            <div class="line"><span class="speaker">B：</span>うーん。これも時代の流れなんじゃないですか?</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">4（ショールーム・水素車）</div>
+            <div class="line"><span class="speaker">A：</span>この車、ちょっと変わってませんか?</div>
+            <div class="line"><span class="speaker">B：</span>あ、これですか? 水素で走るって書いてありますよ。ふーん、CO2を出さないで、出すのは水だけか・・・。</div>
+            <div class="line"><span class="speaker">A：</span>ヘー、エコカーですか。そんなの未来の乗り物だと思ってましたけどねー。</div>
+            <div class="line"><span class="speaker">B：</span>そうですね。まー、環境問題にはみんな敏感になってますからね。デザイン的にもなかなかいいんじゃないですか?</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">5（食品の環境認定）</div>
+            <div class="line"><span class="speaker">A：</span>あ、このお肉、なんかシールがはってありますけど、これ何でしょう?</div>
+            <div class="line"><span class="speaker">B：</span>あ、それは環境にいい商品だっていう認定みたいですよ。安心っていう付加価値をつけてるんですって。</div>
+            <div class="line"><span class="speaker">A：</span>そうなんですか。最近は、みんな品質にうるさくなってきてますからね。</div>
+            <div class="line"><span class="speaker">B：</span>ええ。少し前には偽装問題なんかもたくさん発覚しましたからね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">6（災害ボランティア）</div>
+            <div class="line"><span class="speaker">A：</span>災害ボランティアに登録したんです。</div>
+            <div class="line"><span class="speaker">B：</span>それって、何ですか?</div>
+            <div class="line"><span class="speaker">A：</span>地震や台風で被害を受けた場所に行って、被災者を支援するんです。</div>
+            <div class="line"><span class="speaker">B：</span>へー、そうなんですか。りっぱな社会貢献ですね。僕もなんかやらなくっちゃなー。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">7（親切心で言ったのに）</div>
+            <div class="line"><span class="speaker">A：</span>あ~あ、親切心で言ったのに、嫌がられちゃった。</div>
+            <div class="line"><span class="speaker">B：</span>むなしいですねー。</div>
+            <div class="line"><span class="speaker">A：</span>世代が違うのかな。</div>
+            <div class="line"><span class="speaker">B：</span>いやー、個人の価値観の相違じゃないですか。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">8（トロとシュウマイ）</div>
+            <div class="line"><span class="speaker">A：</span>このトロ、召し上がりましたか? 脂が乗っててトロトロですよ。</div>
+            <div class="line"><span class="speaker">B：</span>本当ですね。何ですか、この舌でとろけるまろやかさは...。</div>
+            <div class="line"><span class="speaker">A：</span>でしょう? それから、このシュウマイも召し上がってみてください。肉汁がジュワッと出てきておいしいですよ。</div>
+            <div class="line"><span class="speaker">B：</span>うーん、ここの海老のプリプリッとした食感がたまりませんねー。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">9（いじめ）</div>
+            <div class="line"><span class="speaker">A：</span>いじめって、なかなかなくならないようですね。</div>
+            <div class="line"><span class="speaker">B：</span>そうですね。けっこう根が深いんでしょうね。</div>
+            <div class="line"><span class="speaker">A：</span>そうなんでしょうね。それに、いじめは、何も子どもの世界に限ったことじゃありませんしね。</div>
+            <div class="line"><span class="speaker">B：</span>まったくですねー。ひとごとじゃありませんよね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">10（いたいけな子どもへの犯罪）</div>
+            <div class="line"><span class="speaker">A：</span>いたいけな子どもをターゲットにした犯罪は、許せませんね。</div>
+            <div class="line"><span class="speaker">B：</span>まったくですね! 怒りで体がふるえます。</div>
+            <div class="line"><span class="speaker">A：</span>本当ですね。こんなことは決して起こってはならないことですよね。</div>
+            <div class="line"><span class="speaker">B：</span>こういう犯罪が多発しているということは、社会が歪んでいるということですね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">11（新聞の勧誘断り方）</div>
+            <div class="line"><span class="speaker">A：</span>新聞の勧誘を断るとき、何て言ったらいいですか?</div>
+            <div class="line"><span class="speaker">B：</span>「もうすぐ国に帰るから、難しいです。」っていうのはどう?</div>
+            <div class="line"><span class="speaker">A：</span>なるほど・・・。でも勧誘はしつこいから、それで本当に大丈夫ですか?</div>
+            <div class="line"><span class="speaker">B：</span>とにかく一度試してみたら?</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">12（敬語の使い方）</div>
+            <div class="line"><span class="speaker">A：</span>どうすれば敬語がうまく使えるようになるんでしょうか?</div>
+            <div class="line"><span class="speaker">B：</span>う~ん、習うより慣れろって言いますからね。</div>
+            <div class="line"><span class="speaker">A：</span>ということは学校で習うより、仕事の現場で覚えるってことですか?</div>
+            <div class="line"><span class="speaker">B：</span>ええ、そうですね。ひたすら実践あるのみですね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">13（就職話を断る）</div>
+            <div class="line"><span class="speaker">A：</span>すいません。この間お願いした就職の話なんですが、やっぱり結構です。</div>
+            <div class="line"><span class="speaker">B：</span>え! 今さら何言ってるの? もう、先方にも頼んじゃったよ。</div>
+            <div class="line"><span class="speaker">A：</span>本当にすいません。急に帰国することになってしまいまして・・・。</div>
+            <div class="line"><span class="speaker">B：</span>こんなこと言いたくないけど、日本の常識じゃそんなこと通らないんだよねー。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">14（ご愁傷さまでした）</div>
+            <div class="line"><span class="speaker">A：</span>この度はご愁傷さまでした。</div>
+            <div class="line"><span class="speaker">B：</span>ありがとうございます。</div>
+            <div class="line"><span class="speaker">A：</span>どうぞお力落としのないように...。</div>
+            <div class="line"><span class="speaker">B：</span>ありがとうございます。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">15（デジカメ）</div>
+            <div class="line"><span class="speaker">A：</span>デジカメ、買い替えようかなって思ってるんですよ。</div>
+            <div class="line"><span class="speaker">B：</span>じゃー、ぶれないできれいに撮れるカメラがいいんじゃない?</div>
+            <div class="line"><span class="speaker">A：</span>ええ、800万画素ぐらいのにしようかなって思って・・・。</div>
+            <div class="line"><span class="speaker">B：</span>うん、800万画素ぐらいあれば十分だよ。今は1万円ちょっとで買えるしね。</div>
+            <div class="line"><span class="speaker">A：</span>本当、うそみたいに安くなりましたよね。昔のあの値段は何だったんでしょうね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">16（別れのメール）</div>
+            <div class="line"><span class="speaker">A：</span>よく話し合った?</div>
+            <div class="line"><span class="speaker">B：</span>話し合うも何も、電話にも出てくれないんですから。</div>
+            <div class="line"><span class="speaker">A：</span>関係修復は難しい?</div>
+            <div class="line"><span class="speaker">B：</span>う~ん、実は、もう別れようって、メールが来ました。</div>
+            <div class="line"><span class="speaker">A：</span>じゃー、ちょっとね。</div>
+            <div class="line"><span class="speaker">B：</span>やっぱりそう思いますか・・・。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">17（韓国旅行・キムチ）</div>
+            <div class="line"><span class="speaker">A：</span>先日、初めて韓国へ行ったんですよ。韓国料理を堪能してきました!</div>
+            <div class="line"><span class="speaker">B：</span>そうですか、韓国の印象はどうでしたか?</div>
+            <div class="line"><span class="speaker">A：</span>はい、見るものすべてが新鮮で、刺激的でした。それで、あの・・・。</div>
+            <div class="line"><span class="speaker">B：</span>はい...。</div>
+            <div class="line"><span class="speaker">A：</span>これ、韓国のお土産です。ほんの「キムチ」ですが・・・。</div>
+            <div class="line"><span class="speaker">B：</span>ほんのきむち...・・、親父ギャグですね。ははは。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">18（釣った魚に餌はやらない）</div>
+            <div class="line"><span class="speaker">A：</span>「釣った魚に餌はやらない」って言うけど、あれ本当ね。</div>
+            <div class="line"><span class="speaker">B：</span>へ〜、ご主人プレゼントしてくださらないんですか?</div>
+            <div class="line"><span class="speaker">A：</span>ぜーんぜん。結婚してから誕生日プレゼントなんて一度もなしよ。</div>
+            <div class="line"><span class="speaker">B：</span>優しそうなご主人なのに・・・、人は見かけによらないもんですね。</div>
+            <div class="line"><span class="speaker">A：</span>優しさとかの問題じゃなくて、男はみんなそんなもんなんじゃないの。</div>
+            <div class="line"><span class="speaker">B：</span>そうですか〜? 僕はちゃんと記念日にはカードとプレゼント贈ってますけどね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">19（お正月・餅・喉）</div>
+            <div class="line"><span class="speaker">A：</span>お正月になると、お年寄りが餅を喉に詰まらせたっていうニュースが増えるね。</div>
+            <div class="line"><span class="speaker">B：</span>年を取ると、飲み込む力が弱くなるんですかねー。</div>
+            <div class="line"><span class="speaker">A：</span>うん。唾液の分泌も減るだろうしねー。</div>
+            <div class="line"><span class="speaker">B：</span>そう言えば、うちの祖母なんて、この間ゼリーを喉に詰まらせたって言ってましたよ。</div>
+            <div class="line"><span class="speaker">A：</span>えーっ、ゼリーで喉が詰まっちゃうの?</div>
+            <div class="line"><span class="speaker">B：</span>ええ、急に呼吸ができなくなっちゃって、このまま死んじゃうのかって思ったらしいですよ。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">20（骨董品・100万円）</div>
+            <div class="line"><span class="speaker">A：</span>この前、骨董品屋に行って、初めて鑑定してもらったんですよ。</div>
+            <div class="line"><span class="speaker">B：</span>ヘー、何を?</div>
+            <div class="line"><span class="speaker">A：</span>うちに代々伝わる皿があって、それがどのぐらい価値があるのか知りたくなって。まー、古いってだけなんですけどね。</div>
+            <div class="line"><span class="speaker">B：</span>それで、何て言われたんですか?</div>
+            <div class="line"><span class="speaker">A：</span>「この皿はたいへん貴重なもので、100万円はくだらない」って。</div>
+            <div class="line"><span class="speaker">B：</span>ヘー、100万円! そりゃ、すごい。</div>
+            <div class="line"><span class="speaker">A：</span>凡人には一見普通にしか見えないんですけどね。</div>
+            <div class="line"><span class="speaker">B：</span>見る人が見れば、本当の価値がわかるんですよ。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">21（日が長くなった・節分）</div>
+            <div class="line"><span class="speaker">A：</span>だいぶ、日が長くなりましたねー。</div>
+            <div class="line"><span class="speaker">B：</span>ええ、5時でも、まだこの明るさですからねー。</div>
+            <div class="line"><span class="speaker">A：</span>もう1月も半ばかー。</div>
+            <div class="line"><span class="speaker">B：</span>あと2週間もすれば、もう立春ですよ。</div>
+            <div class="line"><span class="speaker">A：</span>立春かー。確か、その前の日が節分でしたよね。</div>
+            <div class="line"><span class="speaker">B：</span>節分といっても、豆をまく家は減ってきちゃったんでしょうね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">22（スケート・三回転ジャンプ）</div>
+            <div class="line"><span class="speaker">A：</span>一日練習しただけでこれだけ滑れるなんて、なかなか筋がいいですよ。</div>
+            <div class="line"><span class="speaker">B：</span>えっ、本当ですか? スケートって難しいけどおもしろいもんですね。</div>
+            <div class="line"><span class="speaker">A：</span>一生懸命練習すれば、三回転ジャンプも夢じゃありませんよ。</div>
+            <div class="line"><span class="speaker">B：</span>えーっ、三回転ジャンプもできるようになるんですか?</div>
+            <div class="line"><span class="speaker">A：</span>あなたのやる気次第ですよ。じゃ、今日はここまでにしましょう。</div>
+            <div class="line"><span class="speaker">B：</span>はい。ありがとうございました。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">23（行間を読む）</div>
+            <div class="line"><span class="speaker">A：</span>「行間を読む」って言いますけど、なかなか難しいですよね。</div>
+            <div class="line"><span class="speaker">B：</span>まー、人の感性は一人一人違いますからね。</div>
+            <div class="line"><span class="speaker">A：</span>読者がとんでもない読み違いをしちゃってることもあるでしょうね。</div>
+            <div class="line"><span class="speaker">B：</span>書評を見て、作家が苦笑いするなんてこともあるんじゃないですか。</div>
+            <div class="line"><span class="speaker">A：</span>あり得るでしょうねー。</div>
+            <div class="line"><span class="speaker">B：</span>評論家ももっともらしいこと言いますからね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">24（弟の家業・運送業）</div>
+            <div class="line"><span class="speaker">A：</span>そうですか。木村さん、弟さんがいらっしゃったんですか。</div>
+            <div class="line"><span class="speaker">B：</span>ええ、家業を継いでるんです。</div>
+            <div class="line"><span class="speaker">A：</span>家業というと?</div>
+            <div class="line"><span class="speaker">B：</span>運送業です。</div>
+            <div class="line"><span class="speaker">A：</span>ヘー、運送業ですか。運送業界も、今なかなか難しいみたいですね。</div>
+            <div class="line"><span class="speaker">B：</span>ええ。原油の高騰のあおりを受けちゃって、相当大変らしいですよ。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">25（明けましておめでとう・ハワイ）</div>
+            <div class="line"><span class="speaker">A：</span>明けましておめでとうございます。今年もよろしくお願いします。</div>
+            <div class="line"><span class="speaker">B：</span>あ、おめでとうございます。お正月休みはゆっくりできましたか?</div>
+            <div class="line"><span class="speaker">A：</span>ええ、今年はちょっと奮発して、家族でハワイに行ったんですよ。</div>
+            <div class="line"><span class="speaker">B：</span>え、本当ですか。うらやましい限りですね。</div>
+            <div class="line"><span class="speaker">A：</span>えへへ。で、ビーチで一日中寝そべってのんびりしたり、いろいろ買い物したり...。おかげさまでいい骨休めができました。鈴木さんも、どちらかに出かけられたんですか?</div>
+            <div class="line"><span class="speaker">B：</span>うちは家族で妻の実家に行ったんですけどね、気を遣ってすっかり肩が凝っちゃって...。羽を伸ばすどころじゃなかったんですよ。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unit 4 -->
+    <div class="unit-block">
+      <div class="unit-header">
+        <span class="disk-tag d1-tag">DISK 1</span>
+        <h3>Unit 4　医者や店員などとの会話</h3>
+        <span class="track-tag">Track 28〜36</span>
+      </div>
+      <div style="padding:.7rem 1.2rem; font-size:.85rem; color:#666; background:#fafafa; border-bottom:1px solid #eee;">
+        サービス業・医療の場での会話。フォーマルな言い回しと敬語が多く使われる。
+      </div>
+      <!-- Section 1 -->
+      <div class="section-block">
+        <div class="section-label mid-label">セクション 1　中級レベル　（DISK 1 Track 28〜29）</div>
+        <div class="dialogues">
+          <div class="dialogue mid">
+            <div class="dialogue-num">1（映画館）</div>
+            <div class="line"><span class="speaker">A：</span>あのー、そこ空いてますか?</div>
+            <div class="line"><span class="speaker">B：</span>いいえ、連れがあとから来ます。</div>
+            <div class="line"><span class="speaker">A：</span>じゃー、その隣は?</div>
+            <div class="line"><span class="speaker">B：</span>空いてるみたいですよ。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">2（頭が痛い）</div>
+            <div class="line"><span class="speaker">A：</span>どうしましたか?</div>
+            <div class="line"><span class="speaker">B：</span>最近何だか疲れ気味で、よく頭が痛くなるんです。</div>
+            <div class="line"><span class="speaker">A：</span>そうですか…。今日は熱がありますか?</div>
+            <div class="line"><span class="speaker">B：</span>いや、36度で平熱です。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">3（渋谷への道・振替切符）</div>
+            <div class="line"><span class="speaker">A：</span>すみません、渋谷まで行きたいんですけど…。</div>
+            <div class="line"><span class="speaker">B：</span>渋谷ですね、じゃ、この電車で新橋まで行って、そこで地下鉄に乗り換えてください。</div>
+            <div class="line"><span class="speaker">A：</span>はい、新橋で乗り換えですね。</div>
+            <div class="line"><span class="speaker">B：</span>ええ、そうです。それからこの振替切符を渋谷で駅員に渡してください。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">4（荷物・ワレモノ）</div>
+            <div class="line"><span class="speaker">A：</span>あのー、この荷物送りたいんですけど…。</div>
+            <div class="line"><span class="speaker">B：</span>はい。では、この送り状にご記入をお願いします。</div>
+            <div class="line"><span class="speaker">A：</span>あのー、これ、ワレモノなんですが。</div>
+            <div class="line"><span class="speaker">B：</span>はい。では、ワレモノのところに丸を付けてください。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">5（書留・ハンコ）</div>
+            <div class="line"><span class="speaker">A：</span>高田さん、書留です。ここに認めお願いします。</div>
+            <div class="line"><span class="speaker">B：</span>えーと、今ハンコ持ってないんですけど、サインでもいいですか?</div>
+            <div class="line"><span class="speaker">A：</span>ええ、結構です。</div>
+            <div class="line"><span class="speaker">B：</span>はい。お世話さまでした。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">6（タクシー・一方通行）</div>
+            <div class="line"><span class="speaker">A：</span>そこを左折すると、突き当たりに銀行があるので、そこで停めてください。</div>
+            <div class="line"><span class="speaker">B：</span>お客さん、左折できませんよ、ここは。一方通行ですから。</div>
+            <div class="line"><span class="speaker">A：</span>え〜、じゃ、ここでいいから停めてください。</div>
+            <div class="line"><span class="speaker">B：</span>はい、わかりました。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">7（レストラン予約・人数追加）</div>
+            <div class="line"><span class="speaker">A：</span>今夜8時に予約してある、田中ですが。</div>
+            <div class="line"><span class="speaker">B：</span>はい、田中様ですね。3名様でうかがっております。</div>
+            <div class="line"><span class="speaker">A：</span>それが、もう一人増えちゃったんだけど、大丈夫ですか?</div>
+            <div class="line"><span class="speaker">B：</span>ただいま確認いたしますので、少々お待ちください。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">8（在庫切れ・取り寄せ）</div>
+            <div class="line"><span class="speaker">A：</span>お客様、この商品はただ今在庫切れでして…。</div>
+            <div class="line"><span class="speaker">B：</span>じゃ、取り寄せてもらえますか?</div>
+            <div class="line"><span class="speaker">A：</span>一週間ほどお時間かかりますが、よろしいでしょうか?</div>
+            <div class="line"><span class="speaker">B：</span>ええ、できるだけ早くお願いします。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">9（部屋探し・1DK）</div>
+            <div class="line"><span class="speaker">A：</span>あのー、今、部屋を探してるんですが、駅から歩いて5分以内で家賃が7万円ぐらいのところってありますか。</div>
+            <div class="line"><span class="speaker">B：</span>そうですね。こちらなどはいかがでしょうか。こちらはたいへん人気の物件なんですよ。</div>
+            <div class="line"><span class="speaker">A：</span>そうですか。でも、間取りがちょっと…。1DKでいいんです。</div>
+            <div class="line"><span class="speaker">B：</span>それでは、こちらのお部屋など特におすすめですよ。</div>
+            <div class="line"><span class="speaker">A：</span>そうですね。でも、この部屋北向きですよね。</div>
+            <div class="line"><span class="speaker">B：</span>それではこちらはいかがでしょうか。特に日当たりは最高ですし、築年数もそれほど経っていませんし。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">10（プレゼント包装・サービスカウンター）</div>
+            <div class="line"><span class="speaker">A：</span>すいません、これ値段をとってプレゼント用に包装してもらいたいんですけど。</div>
+            <div class="line"><span class="speaker">B：</span>はい、かしこまりました。では、このレシートとお品物をお持ちになって、サービスカウンターへいらっしゃってください。</div>
+            <div class="line"><span class="speaker">A：</span>えっ、サービスカウンターってどこですか?</div>
+            <div class="line"><span class="speaker">B：</span>あのエレベーターの左側にございます。</div>
+            <div class="line"><span class="speaker">A：</span>エレベーターの左側、あー、わかりました。レシートを出せばいいんですね?</div>
+            <div class="line"><span class="speaker">B：</span>はい、そうです。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="section-block">
+        <div class="section-label adv-label">セクション 2　上級レベル　（DISK 1 Track 30〜33）</div>
+        <div class="dialogues">
+          <div class="dialogue adv">
+            <div class="dialogue-num">1（歯科・キャンセル）</div>
+            <div class="line"><span class="speaker">A：</span>はい、井上歯科でございます。</div>
+            <div class="line"><span class="speaker">B：</span>あ、あのー、明日の5時に予約してる清水ですが。</div>
+            <div class="line"><span class="speaker">A：</span>あ、はい、清水様ですね。</div>
+            <div class="line"><span class="speaker">B：</span>はい、あの、ちょっと用事ができまして、明日キャンセルしたいんですが。</div>
+            <div class="line"><span class="speaker">A：</span>わかりました。では、次回はいつお取りしましょうか。</div>
+            <div class="line"><span class="speaker">B：</span>えーと、6日の5時か6時はどうでしょうか。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">2（郵便転送）</div>
+            <div class="line"><span class="speaker">A：</span>あのー、来週引っ越すので、郵便物の転送をお願いしたいんですけど。</div>
+            <div class="line"><span class="speaker">B：</span>はい。では、こちらの用紙にご記入ください。</div>
+            <div class="line"><span class="speaker">A：</span>あの、どのくらいの間転送してくれるんですか?</div>
+            <div class="line"><span class="speaker">B：</span>指定日から1年間になります。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">3（メガネ・似合う）</div>
+            <div class="line"><span class="speaker">A：</span>お客様、とてもよくお似合いですよ。</div>
+            <div class="line"><span class="speaker">B：</span>そう? 顔が大きく見えないかしら?</div>
+            <div class="line"><span class="speaker">A：</span>フレームがシャープですから、かえって小さく見えますよ。</div>
+            <div class="line"><span class="speaker">B：</span>じゃー、いただこうかしら。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">4（ラストオーダー・デザート）</div>
+            <div class="line"><span class="speaker">A：</span>そろそろラストオーダーのお時間ですので、ご注文があればおうかがいいたしますが。</div>
+            <div class="line"><span class="speaker">B：</span>じゃー、ちょっとデザートのメニュー見せてもらえますか?</div>
+            <div class="line"><span class="speaker">A：</span>はい、こちらでございます。本日はイチゴのムースがおすすめですが。</div>
+            <div class="line"><span class="speaker">B：</span>じゃ、それお願いします。あ、それと、コーヒーもね。</div>
+            <div class="line"><span class="speaker">A：</span>コーヒーは、カプチーノかエスプレッソをご用意できますが。</div>
+            <div class="line"><span class="speaker">B：</span>じゃ、エスプレッソにしてください。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">5（ポイントカード再発行）</div>
+            <div class="line"><span class="speaker">A：</span>あのー、ポイントカードをなくしちゃったんですが、再発行をお願いできますか?</div>
+            <div class="line"><span class="speaker">B：</span>あ、はい。そうしますと、新規のお申し込みになりますので、こちらの用紙に記入していただけますか?</div>
+            <div class="line"><span class="speaker">A：</span>はい。あのー、ちょっと聞きたいんですけど、前のカードに溜まってたポイントはどうなるんですか?</div>
+            <div class="line"><span class="speaker">B：</span>申し訳ございませんが、ポイント数はそのカードでしか認証できないんです。</div>
+            <div class="line"><span class="speaker">A：</span>そうなんだ…。けっこう溜まってたのに、惜しかったな〜。</div>
+            <div class="line"><span class="speaker">B：</span>はい、お待たせしました。こちらが新しいカードです。裏側に署名なさってからお使いください。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">6（注文が来ない・キャンセル）</div>
+            <div class="line"><span class="speaker">A：</span>あのー、すみません。まだ来ないんですけど。</div>
+            <div class="line"><span class="speaker">B：</span>あ、申し訳ございません。</div>
+            <div class="line"><span class="speaker">A：</span>もう30分も待ってるんですけど…。それに、あちらより私の方が先に注文してると思うんだけど…。</div>
+            <div class="line"><span class="speaker">B：</span>あ、本当に申し訳ございません。ただいま確認してまいりますので。</div>
+            <div class="line"><span class="speaker">A：</span>あんまり時間ないんで…。まだ時間がかかるようだったらキャンセルにしてください。</div>
+            <div class="line"><span class="speaker">B：</span>あ、ただいますぐに確認してまいりますので少々お待ちいただけますか。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">7（本屋・中村由美の小説）</div>
+            <div class="line"><span class="speaker">A：</span>あのー、すみません。中村由美の最近出た小説、どこにありますか?</div>
+            <div class="line"><span class="speaker">B：</span>えーと、題名はおわかりですか?</div>
+            <div class="line"><span class="speaker">A：</span>えーと、花のようになんとかかんとかって感じの…。</div>
+            <div class="line"><span class="speaker">B：</span>少々お待ちください。ただいまお調べしますので。</div>
+            <div class="line"><span class="speaker">A：</span>あー、『花のように風のように』だったかなー、確か。</div>
+            <div class="line"><span class="speaker">B：</span>はい。あー、ございます。こちらです。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">8（冷蔵庫・省エネ）</div>
+            <div class="line"><span class="speaker">A：</span>あ、すいません。この冷蔵庫、こっちのに比べてだいぶ高いんだけど、何が違うんですか?</div>
+            <div class="line"><span class="speaker">B：</span>はい、えーとですね。</div>
+            <div class="line"><span class="speaker">A：</span>容量も同じだし、使い勝手も似たような感じだし。</div>
+            <div class="line"><span class="speaker">B：</span>あー、こちらは省エネの点でだいぶ進んでるんです。消費電力とかCO2の排出量とかですね。</div>
+            <div class="line"><span class="speaker">A：</span>なるほど。消費電力ねー。ちょっと細かい数字、説明してもらえます?</div>
+            <div class="line"><span class="speaker">B：</span>はい。では、こちらのパンフレットをごらんください。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">9（美容院・パーマ）</div>
+            <div class="line"><span class="speaker">A：</span>今日はどうなさいますか?</div>
+            <div class="line"><span class="speaker">B：</span>そうね、だんだん暑くなってきたから、思い切ってバッサリ切っちゃおうかな。</div>
+            <div class="line"><span class="speaker">A：</span>じゃ、全体的に少しすいて髪を軽くしましょうか。ゆるいウェーブをつければ、夏らしく涼しげになりますよ。お客様の髪ですと、パーマはかかりやすいですし。</div>
+            <div class="line"><span class="speaker">B：</span>そうねー、それと髪を少し明るめの色にしてもらおうかな。</div>
+            <div class="line"><span class="speaker">A：</span>そうですね、じゃ、こちらの赤っぽい茶色なんかいかがですか? それから、こちらのオレンジがかった茶色も今流行りですよ。お客様にもよくお似合いだと思いますが…。</div>
+            <div class="line"><span class="speaker">B：</span>そーね。たまにはイメージチェンジもいいかもね。じゃ、あとはお任せで。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">10（図書館カード・在勤証明）</div>
+            <div class="line"><span class="speaker">A：</span>すみません、図書館のカードを作りたいんですが…。この区の住民じゃないんですけど、大丈夫ですか?</div>
+            <div class="line"><span class="speaker">B：</span>お勤め先がこの区でしたら、問題ありませんよ。本日何か会社の住所が書いてあるものをお持ちでいらっしゃいますか?</div>
+            <div class="line"><span class="speaker">A：</span>あ、名刺ならあります。</div>
+            <div class="line"><span class="speaker">B：</span>申し訳ありません。名刺ですとちょっと…。社員証とか健康保険証とか、公的に証明できるものをお持ちですか。</div>
+            <div class="line"><span class="speaker">A：</span>え〜、公的なものですか。僕、フリーランス契約だからそういったもの、ないんですよ。</div>
+            <div class="line"><span class="speaker">B：</span>でしたらお手数ですが、在勤証明書をご所属の機関で書いてもらって、持ってきていただけないでしょうか。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">11（銀行・定期預金解約）</div>
+            <div class="line"><span class="speaker">A：</span>お電話ありがとうございます。三友銀行、山田が承ります。</div>
+            <div class="line"><span class="speaker">B：</span>すみません、ちょっとお聞きしたいんですが。そちらから、定期預金の満期通知が届いたんですが。</div>
+            <div class="line"><span class="speaker">A：</span>あ、いつもご利用ありがとうございます。満期のお知らせでございますね。失礼ですが、お客様は継続ご希望でいらっしゃいますか。それとも解約ご希望でしょうか。</div>
+            <div class="line"><span class="speaker">B：</span>解約でお願いします。</div>
+            <div class="line"><span class="speaker">A：</span>それでは、定期預金の通帳と届け出印、身分証明書をお持ちの上、お近くの支店に期日までにお越しいただき、お手続きをお願いいたします。</div>
+            <div class="line"><span class="speaker">B：</span>はい、わかりました。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">12（薬・診察券・6カ月）</div>
+            <div class="line"><span class="speaker">A：</span>本日は、診察をご希望ですか?</div>
+            <div class="line"><span class="speaker">B：</span>あのー、薬だけお願いしたいんですが…。</div>
+            <div class="line"><span class="speaker">A：</span>あ、はい。では、診察券を拝見できますか?</div>
+            <div class="line"><span class="speaker">B：</span>はい。</div>
+            <div class="line"><span class="speaker">A：</span>えーと、前回いらっしゃったのが9月ですから、6カ月過ぎてしまってますね。</div>
+            <div class="line"><span class="speaker">B：</span>あ、そうですか。そんなに経ってますか。</div>
+            <div class="line"><span class="speaker">A：</span>ええ、6カ月過ぎますと、一度診察を受けていただかないとお薬はお出しできないんですよ。</div>
+            <div class="line"><span class="speaker">B：</span>あ、そうなんですか。じゃ、診察、お願いします。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">13（お寿司・盛り合わせ予約）</div>
+            <div class="line"><span class="speaker">A：</span>あのー。</div>
+            <div class="line"><span class="speaker">B：</span>はい、いらっしゃいませ。</div>
+            <div class="line"><span class="speaker">A：</span>この5人前のお寿司の盛り合わせ、予約したいんですけど。</div>
+            <div class="line"><span class="speaker">B：</span>はい、こちらの盛り合わせですね。ありがとうございます。いつご用意いたしましょうか。</div>
+            <div class="line"><span class="speaker">A：</span>明日お昼頃、取りに来ます。</div>
+            <div class="line"><span class="speaker">B：</span>お昼頃ですね。じゃ、こちらにお名前と電話番号をお願いします。</div>
+            <div class="line"><span class="speaker">A：</span>はい。あ、それから、この太巻きも一本入れてもらえますか?</div>
+            <div class="line"><span class="speaker">B：</span>こちらの太巻きを一本ですね。お会計は先になりますが、よろしいですか?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISK 2 -->
+  <section class="block" id="disk2">
+    <h2>💿 DISK 2　Unit 5〜8 の会話</h2>
+
+    <!-- Unit 5 -->
+    <div class="unit-block">
+      <div class="unit-header">
+        <span class="disk-tag d2-tag">DISK 2</span>
+        <h3>Unit 5　同僚との会話</h3>
+        <span class="track-tag">DISK 2 Track 02〜</span>
+      </div>
+      <div style="padding:.7rem 1.2rem; font-size:.85rem; color:#666; background:#fafafa; border-bottom:1px solid #eee;">
+        職場の同僚との会話。仕事・プライベート・愚痴など、同等の立場での率直なやりとり。
+      </div>
+      <!-- Section 1 -->
+      <div class="section-block">
+        <div class="section-label mid-label">セクション 1　中級レベル　（DISK 2 Track 02〜05）</div>
+        <div class="dialogues">
+          <div class="dialogue mid">
+            <div class="dialogue-num">1（給料日・フトコロが寒い）</div>
+            <div class="line"><span class="speaker">A：</span>今日は何日だっけ?</div>
+            <div class="line"><span class="speaker">B：</span>22日だけど。</div>
+            <div class="line"><span class="speaker">A：</span>あー、あとちょっとで給料だ。フトコロが寒くってねー。</div>
+            <div class="line"><span class="speaker">B：</span>あー、あと3日だね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">2（三連休・金欠）</div>
+            <div class="line"><span class="speaker">A：</span>今度の三連休、何するの?</div>
+            <div class="line"><span class="speaker">B：</span>うーん、どこにも行かないで、家でゴロゴロするつもり。</div>
+            <div class="line"><span class="speaker">A：</span>え〜、おもしろくないじゃない、せっかくの休みなのに。</div>
+            <div class="line"><span class="speaker">B：</span>だって、しょうがないよ、金欠なんだから。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">3（田中君・昇進試験）</div>
+            <div class="line"><span class="speaker">A：</span>聞いた? 田中君、この間の昇進試験、またダメだったんだって。</div>
+            <div class="line"><span class="speaker">B：</span>うん、あんなに頑張ってたのにね。ガックリきてるだろうなー。</div>
+            <div class="line"><span class="speaker">A：</span>明日会ったら、なんて言って慰めよう。</div>
+            <div class="line"><span class="speaker">B：</span>気の毒で、声のかけようもないよ。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">4（送別会・立て替え）</div>
+            <div class="line"><span class="speaker">A：</span>山田さんの送別会の費用、一人3000円でお願いします。</div>
+            <div class="line"><span class="speaker">B：</span>すみません。今日は持ち合わせがなくて…。</div>
+            <div class="line"><span class="speaker">A：</span>じゃー、私が立て替えておきましょうか。</div>
+            <div class="line"><span class="speaker">B：</span>え、いいんですか? すみません、明日、必ずお返しします。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">5（課長の妹・瓜二つ）</div>
+            <div class="line"><span class="speaker">A：</span>課長の結婚式行ったら、妹さんと瓜二つなの。</div>
+            <div class="line"><span class="speaker">B：</span>え、本当? 妹さん、ちょっとかわいそうかも…。</div>
+            <div class="line"><span class="speaker">A：</span>いや、似てるんだけど、とっても感じよかったよ。</div>
+            <div class="line"><span class="speaker">B：</span>きっと、性格のいい妹さんなんだろうね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">6（代引き・留守番）</div>
+            <div class="line"><span class="speaker">A：</span>すみません。明日、午前中に私宛に代引きで荷物が届くことになってるんですけど、留番なんで受け取ってもらえますか?</div>
+            <div class="line"><span class="speaker">B：</span>了解。お金だけ準備しといてね。</div>
+            <div class="line"><span class="speaker">A：</span>はい。じゃー、この引き出しにお金入れときます。ぴったりお釣りなしです。</div>
+            <div class="line"><span class="speaker">B：</span>わかった。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">7（データ消えた・バックアップ）</div>
+            <div class="line"><span class="speaker">A：</span>あ〜、何これ〜！ データ全部消えちゃったよ〜。</div>
+            <div class="line"><span class="speaker">B：</span>え〜? どうして?</div>
+            <div class="line"><span class="speaker">A：</span>わかんないけど、急に画面が真っ暗になって…。</div>
+            <div class="line"><span class="speaker">B：</span>バックアップとってなかったの?</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">8（路上駐車・パーキング）</div>
+            <div class="line"><span class="speaker">A：</span>先輩、ここには駐車できませんよ。</div>
+            <div class="line"><span class="speaker">B：</span>そうか…。最近、路上駐車の取り締まり厳しくなったからね。</div>
+            <div class="line"><span class="speaker">A：</span>しょうがないですね、パーキング探しましょうか。</div>
+            <div class="line"><span class="speaker">B：</span>いや、ほんの10分で済むから、ちょっと乗っててくれない?</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">9（彼女の実家・挨拶）</div>
+            <div class="line"><span class="speaker">A：</span>坂本さん、初めて彼女のうちに行ったとき、向こうのご両親になんて言いましたか?</div>
+            <div class="line"><span class="speaker">B：</span>え? なんて言ったかな。どうして?</div>
+            <div class="line"><span class="speaker">A：</span>実は、来週、彼女のうちに行くんで。</div>
+            <div class="line"><span class="speaker">B：</span>え、まだ結婚するんじゃないんでしょ?</div>
+            <div class="line"><span class="speaker">A：</span>ええ、そうなんですけどね。でも、何か言うべきかなって。</div>
+            <div class="line"><span class="speaker">B：</span>うーん。遊びでつき合ってるわけじゃないってことは、岡田さんを見れば、向こうのご両親もわかってくれるんじゃない? 挨拶だけでいいんじゃない?</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">10（バレンタイン・義理チョコ）</div>
+            <div class="line"><span class="speaker">A：</span>バレンタインデーにチョコレートもらった?</div>
+            <div class="line"><span class="speaker">B：</span>へへへ、もらったよ。本命から！ 田中は?</div>
+            <div class="line"><span class="speaker">A：</span>もらったにはもらったけど、義理チョコ。</div>
+            <div class="line"><span class="speaker">B：</span>いやー、義理でも全然もらえないよりいいんじゃない?</div>
+            <div class="line"><span class="speaker">A：</span>でも、お返しに1万円はかかるかも…。ちょっとありがた迷惑だよな。</div>
+            <div class="line"><span class="speaker">B：</span>そうかー? まー、感謝の印ってことで、もらっとけよ。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">11（二日酔い・踏んだり蹴ったり）</div>
+            <div class="line"><span class="speaker">A：</span>あー、調子わる〜。</div>
+            <div class="line"><span class="speaker">B：</span>どうしたの?</div>
+            <div class="line"><span class="speaker">A：</span>ちょっと、夕べ飲みすぎて…。胸はムカムカするし、胃はもたれるし、頭はガンガンするし…。それに女房には「毎日午前様だ」って怒られるし…。踏んだり蹴ったりだよ。</div>
+            <div class="line"><span class="speaker">B：</span>そんなになるまで飲むから、罰が当たったのよ。</div>
+            <div class="line"><span class="speaker">A：</span>あー、腹も痛くなってきた。ちょっとトイレ。</div>
+            <div class="line"><span class="speaker">B：</span>まったく、もう〜。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">12（歓送迎会・日程）</div>
+            <div class="line"><span class="speaker">A：</span>田中さん、歓送迎会の日程を決めたいんですけど、希望日ってありますか?</div>
+            <div class="line"><span class="speaker">B：</span>えーと、いつ頃の予定?</div>
+            <div class="line"><span class="speaker">A：</span>再来週のどこかでやりたいんですけどねー。</div>
+            <div class="line"><span class="speaker">B：</span>再来週ね〜。今んとこ、全部空いてるけど…。</div>
+            <div class="line"><span class="speaker">A：</span>じゃー、いつでもオーケーってことでいいですか?</div>
+            <div class="line"><span class="speaker">B：</span>うーん、やっぱ、金曜日がベストだな。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">13（電車遅延・遅刻連絡）</div>
+            <div class="line"><span class="speaker">A：</span>もしもし、遠藤ですが。</div>
+            <div class="line"><span class="speaker">B：</span>あ、遠藤さん、山本です。おはようございます。</div>
+            <div class="line"><span class="speaker">A：</span>おはようございます。えーと、今東京駅にいるんですけど、電車が事故か何かで止まっちゃってるんですよ。いつ動くかもわかんなくて。</div>
+            <div class="line"><span class="speaker">B：</span>あ、そうなんですか。</div>
+            <div class="line"><span class="speaker">A：</span>ええ。で、今日朝一で打ち合わせが入ってるんですけど、少し遅れるって主任に伝えてもらえますか。</div>
+            <div class="line"><span class="speaker">B：</span>はい、わかりました。伝えておきます。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">14（人間ドック・強制）</div>
+            <div class="line"><span class="speaker">A：</span>加藤さん、これ人間ドックの案内書です。よくお読みになって、申込書を出してくださいね。</div>
+            <div class="line"><span class="speaker">B：</span>え、人間ドック? いやー、ちょっと忙しくてそんなの行ってる暇ないんで…。</div>
+            <div class="line"><span class="speaker">A：</span>でも、加藤さんの年齢だと、人間ドックは行かなきゃいけないことになってるんですよ。</div>
+            <div class="line"><span class="speaker">B：</span>え、そうなんですか? やだなー。なんか、かえって病気になっちゃうような気がして。</div>
+            <div class="line"><span class="speaker">A：</span>まー、そう言わずに。</div>
+            <div class="line"><span class="speaker">B：</span>まー、しょうがないですね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">15（電車・今度と次）</div>
+            <div class="line"><span class="speaker">A：</span>今度の電車は15分で、次の電車は25分ですね。</div>
+            <div class="line"><span class="speaker">B：</span>うん、つまり、今度と次では今度のほうが早いってことだね。</div>
+            <div class="line"><span class="speaker">A：</span>なんか紛らわしいですよね。これって、鉄道会社に共通した言い方なんでしょうか。</div>
+            <div class="line"><span class="speaker">B：</span>う〜ん、どうかなー。今度からちょっと気をつけて見てみよう。</div>
+            <div class="line"><span class="speaker">A：</span>あ、電車来ましたよ。急ぎましょう。</div>
+            <div class="line"><span class="speaker">B：</span>うん、今度のに乗れないと、約束の時間ギリギリになっちゃうからね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">16（山田さん・マイク独占）</div>
+            <div class="line"><span class="speaker">A：</span>「一度マイクを握ったら離さない」とは、山田さんのことだね。</div>
+            <div class="line"><span class="speaker">B：</span>さっきから、3曲ぶっ続けですよ。上手ならいいんですけどねー。</div>
+            <div class="line"><span class="speaker">A：</span>誰だよ、山田さんにマイク渡したのは…。</div>
+            <div class="line"><span class="speaker">B：</span>渡したんじゃなくて、奪い取られたんですよ。</div>
+            <div class="line"><span class="speaker">A：</span>しっかりマイク持っとかないからだよ。あ〜あ、これじゃ俺の順番なんて来やしないよ。</div>
+            <div class="line"><span class="speaker">B：</span>こっそり抜け出して、ほかのカラオケに行っちゃいましょうかー。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="section-block">
+        <div class="section-label adv-label">セクション 2　上級レベル　（DISK 2 Track 06〜11）</div>
+        <div class="dialogues">
+          <div class="dialogue adv">
+            <div class="dialogue-num">1（目がショボショボ・老眼）</div>
+            <div class="line"><span class="speaker">A：</span>あー、目がショボショボする。</div>
+            <div class="line"><span class="speaker">B：</span>どうしたの? 老眼?</div>
+            <div class="line"><span class="speaker">A：</span>そうかなー。38歳って、もう老眼年齢?</div>
+            <div class="line"><span class="speaker">B：</span>冗談だよ。課の中で美智子さんが一番若いんだから。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">2（女房・午前様）</div>
+            <div class="line"><span class="speaker">A：</span>女房のやつ、朝っぱらからガミガミうるさいったらありゃしないよ。</div>
+            <div class="line"><span class="speaker">B：</span>毎晩午前様じゃねー、しかたないんじゃないの?</div>
+            <div class="line"><span class="speaker">A：</span>誰が好き好んで午前様やってると思ってんだよ。</div>
+            <div class="line"><span class="speaker">B：</span>なんだかんだ言っても、おまえのこと心配してるんだよ。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">3（山田さん・ギクシャク）</div>
+            <div class="line"><span class="speaker">A：</span>まだ落ち込んでんの?</div>
+            <div class="line"><span class="speaker">B：</span>うん。あの一件以来、山田さんとの仲がギクシャクしちゃって…。</div>
+            <div class="line"><span class="speaker">A：</span>職場は明るく楽しくだよ。中村さんから飲みに誘えば?</div>
+            <div class="line"><span class="speaker">B：</span>うん。でも顔を見るとなんか気まずくって。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">4（吉田さん・クビ）</div>
+            <div class="line"><span class="speaker">A：</span>吉田さん、とうとう会社クビになったんだって。</div>
+            <div class="line"><span class="speaker">B：</span>うーん、あの仕事ぶりじゃ、当然だよね。</div>
+            <div class="line"><span class="speaker">A：</span>うん、身から出た錆だね。</div>
+            <div class="line"><span class="speaker">B：</span>もっと動ける人があのポストには必要だからね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">5（中田さん・遅刻・バレバレ）</div>
+            <div class="line"><span class="speaker">A：</span>今日の中田さんの遅刻の理由、聞いた? さっとまた寝過ごしたのに、渋滞だって。</div>
+            <div class="line"><span class="speaker">B：</span>うん。バレバレだったね。ネクタイしてなかったし、寝癖もついてたしね。</div>
+            <div class="line"><span class="speaker">A：</span>そもそも、彼、渋滞が関係する交通機関なんか使ってたっけ?</div>
+            <div class="line"><span class="speaker">B：</span>うちから駅までの自転車が渋滞してたって、言いたいんじゃないの?</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">6（締め切り・手伝い）</div>
+            <div class="line"><span class="speaker">A：</span>あー、どうしよう。締め切りに間に合わない！</div>
+            <div class="line"><span class="speaker">B：</span>どうしたの? ちょっと手伝おうか?</div>
+            <div class="line"><span class="speaker">A：</span>え、いいの? 悪いね。恩に着るよ。</div>
+            <div class="line"><span class="speaker">B：</span>そんな水臭いこと言って。困ったときはお互いさまだよ。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">7（人事課・やりあい）</div>
+            <div class="line"><span class="speaker">A：</span>昨日、人事課の鈴木さんと激しくやりあってたでしょ。見ちゃったよ〜。大変そうだね〜。</div>
+            <div class="line"><span class="speaker">B：</span>え、見てたの?</div>
+            <div class="line"><span class="speaker">A：</span>あの人、一筋縄じゃいかないからね。</div>
+            <div class="line"><span class="speaker">B：</span>でも、今思えば言いすぎたかな。そうか、見られたか。穴があったら入りたいよ。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">8（竹内君・博士号）</div>
+            <div class="line"><span class="speaker">A：</span>竹内君って、博士号持てるんだってね。</div>
+            <div class="line"><span class="speaker">B：</span>うん、人は見かけによらないよね。</div>
+            <div class="line"><span class="speaker">A：</span>バカなことばっかり言ってるけどさ。</div>
+            <div class="line"><span class="speaker">B：</span>そうなんだよね。でもやるときはやるよね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">9（部長面談・やけ酒）</div>
+            <div class="line"><span class="speaker">A：</span>どうだった? 部長面談。</div>
+            <div class="line"><span class="speaker">B：</span>も〜、ガンガンどなられちゃって、意気消沈。</div>
+            <div class="line"><span class="speaker">A：</span>じゃー、今夜はおまえのやけ酒にでもつき合うか。</div>
+            <div class="line"><span class="speaker">B：</span>おー、パーっと憂さ晴らしでもするか。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">10（課長・ネチネチ）</div>
+            <div class="line"><span class="speaker">A：</span>も〜、今度の課長ったらネチネチしつこいったらありゃしない。</div>
+            <div class="line"><span class="speaker">B：</span>また叱られたの?</div>
+            <div class="line"><span class="speaker">A：</span>謝ってるのに、1時間も嫌味タラタラ言われちゃった。</div>
+            <div class="line"><span class="speaker">B：</span>ま、右から左へ受け流しとけばいいんじゃない?</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">11（部長の飲み会・新入社員）</div>
+            <div class="line"><span class="speaker">A：</span>おい、明日の飲み会どうする?</div>
+            <div class="line"><span class="speaker">B：</span>行かないわけにはいかないでしょ? 部長のお誘いだもの。</div>
+            <div class="line"><span class="speaker">A：</span>そうだね…。新入社員はつらいよね。</div>
+            <div class="line"><span class="speaker">B：</span>何とか一次会だけで帰るようにしようね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">12（やり直し・割に合わない）</div>
+            <div class="line"><span class="speaker">A：</span>またいちからやり直し…。</div>
+            <div class="line"><span class="speaker">B：</span>あんだけエネルギー注いだのにね。</div>
+            <div class="line"><span class="speaker">A：</span>全然積み上がっていかない。本当に、割に合わないね。</div>
+            <div class="line"><span class="speaker">B：</span>合わないね〜。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">13（部長の娘・結婚）</div>
+            <div class="line"><span class="speaker">A：</span>部長の娘さん、結婚することになったらしいですよ。</div>
+            <div class="line"><span class="speaker">B：</span>へー。娘を結婚させる父親の気持ちって、どんなものなんでしょうね。</div>
+            <div class="line"><span class="speaker">A：</span>ホッとした気持ちと寂しい気持ちが入り交じって、感極まるって感じなんじゃないですかね。</div>
+            <div class="line"><span class="speaker">B：</span>そうかー。花嫁の父親って、複雑な心境なんですねー。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">14（パク・ヨンジュン・配属）</div>
+            <div class="line"><span class="speaker">A：</span>この度マーケティング部に配属されましたパク・ヨンジュンです。これからお世話になります。どうぞ、よろしくお願いいたします。</div>
+            <div class="line"><span class="speaker">B：</span>パク・ヨンジュンさんね。渡辺です。どうぞよろしく。ところで、お名前はなんとお呼びすればいいですか。</div>
+            <div class="line"><span class="speaker">A：</span>あ、前の部署では同姓の人がいたのでヨンジュンと呼ばれていましたが、ここではパクと呼んでください。</div>
+            <div class="line"><span class="speaker">B：</span>わかりました。パクさんですね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">15（営業部・企画部・会議）</div>
+            <div class="line"><span class="speaker">A：</span>先ほども申し上げましたように、営業部としては賛成いたしかねます。</div>
+            <div class="line"><span class="speaker">B：</span>でも、反対の理由が今一つはっきりこちらに伝わって来ないんですよ。</div>
+            <div class="line"><span class="speaker">A：</span>利益の見込みがない商品の企画に賛成するわけにはいかないということです。</div>
+            <div class="line"><span class="speaker">B：</span>いや、短期的には厳しいかもしれませんが、長期的には必ず利益が見込めると思うんですよ。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">16（最終報告書・フォーマット）</div>
+            <div class="line"><span class="speaker">A：</span>最終報告書ですが、ひとまずフォーマットを作ってみました。ちょっと目を通して、それで良ければ書き始めといてもらえますか?</div>
+            <div class="line"><span class="speaker">B：</span>はい。締め切りはいつですか?</div>
+            <div class="line"><span class="speaker">A：</span>先方はまだ何も言ってこないけど、前倒しにできることとしといてください。</div>
+            <div class="line"><span class="speaker">B：</span>はい。わかりました。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">17（部長出張・のびのび）</div>
+            <div class="line"><span class="speaker">A：</span>あー、気分爽快！</div>
+            <div class="line"><span class="speaker">B：</span>なんかあったの?</div>
+            <div class="line"><span class="speaker">A：</span>いや、ただ部長が出張で席にいないだけなんだけどね。</div>
+            <div class="line"><span class="speaker">B：</span>そういえば、部全体がのびのびしてるみたいだねー。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">18（山田部長・昇進内定）</div>
+            <div class="line"><span class="speaker">A：</span>山田部長、今夜はいやに機嫌がいいですよね。</div>
+            <div class="line"><span class="speaker">B：</span>うん。何でも昇進が内定したらしいよ。</div>
+            <div class="line"><span class="speaker">A：</span>へー、そうなんですか。あの笑顔、いつもの部長とは思えませんね。</div>
+            <div class="line"><span class="speaker">B：</span>よっぽど嬉しかったんだろうね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">19（木村さん・哲学の本）</div>
+            <div class="line"><span class="speaker">A：</span>今日も木村さん、昼休みに難しそうな哲学の本読んでたよ。</div>
+            <div class="line"><span class="speaker">B：</span>そうそう、いつも読んでるよね。</div>
+            <div class="line"><span class="speaker">A：</span>なんか、勉強熱心そうだよねー。</div>
+            <div class="line"><span class="speaker">B：</span>え〜、そうは思えないけどなー。現実逃避なんじゃないの?</div>
+            <div class="line"><span class="speaker">A：</span>また、すぐそうやって物事を斜めに見るんだから。もっと素直になれば?</div>
+            <div class="line"><span class="speaker">B：</span>しょうがないよ、性分なんだから。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">20（新人教育・先輩後輩）</div>
+            <div class="line"><span class="speaker">A：</span>いくら口を酸っぱくして言っても、聞くほうにその気がなきゃね…。</div>
+            <div class="line"><span class="speaker">B：</span>本当、本当！ 言うだけ疲れるってもんだよ。</div>
+            <div class="line"><span class="speaker">A：</span>かと言って、何も言わないでいいってわけにもいかないだろうし…。</div>
+            <div class="line"><span class="speaker">B：</span>「人の振り見てわが振り直せ」で、自分で気づくのが一番なんだけどねー。</div>
+            <div class="line"><span class="speaker">A：</span>無理、無理！ だいたい先輩後輩の観念からしてないんだから。</div>
+            <div class="line"><span class="speaker">B：</span>僕たちが新人の頃は、先輩の言葉は絶対だったけどな〜。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">21（プロジェクト・振り出し）</div>
+            <div class="line"><span class="speaker">A：</span>例のプロジェクト、まだ決まらないの?</div>
+            <div class="line"><span class="speaker">B：</span>そうなんだよ。当初の計画が保留になっちゃってんだよねー。</div>
+            <div class="line"><span class="speaker">A：</span>なんか話がややこしくなってない?</div>
+            <div class="line"><span class="speaker">B：</span>そうなんだ。あちらを立てればこちらが立たずでさー。</div>
+            <div class="line"><span class="speaker">A：</span>いっそ、振り出しに戻しちゃえば?</div>
+            <div class="line"><span class="speaker">B：</span>そうしたいのはやまやまなんだけどねー。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">22（陣痛・会議）</div>
+            <div class="line"><span class="speaker">A：</span>どうしたの? さっさから時計ばっかり気にして、ちっとも落ち着きがないけど。</div>
+            <div class="line"><span class="speaker">B：</span>うん。実は、さっき病院にいる妻から連絡があって、陣痛が始まったんだって。</div>
+            <div class="line"><span class="speaker">A：</span>え、本当? だったら仕事なんてしてないで、奥さんの所に早く行ってあげなさいよ。</div>
+            <div class="line"><span class="speaker">B：</span>うん、そうしたいのはやまやまなんだけど、どうしても抜けられない会議があって…。</div>
+            <div class="line"><span class="speaker">A：</span>そんなのどうだっていいじゃない。一生に何度もあることじゃないのよ。</div>
+            <div class="line"><span class="speaker">B：</span>うーん。そうだね。じゃ、課長に相談してくるよ。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">23（山田さん・人づき合い・出世）</div>
+            <div class="line"><span class="speaker">A：</span>山田さんって、飲み会に誘っても絶対に来たことないし、人づき合いよくないよね。</div>
+            <div class="line"><span class="speaker">B：</span>うん。部長のゴルフの誘いも平気で断っちゃうんだって。</div>
+            <div class="line"><span class="speaker">A：</span>へー、どんなに仕事ができてもそれじゃーね…。</div>
+            <div class="line"><span class="speaker">B：</span>そうだよね。やっぱり人間関係って大切だよね。</div>
+            <div class="line"><span class="speaker">A：</span>うん。特に組織の仕事って、そういうの影響するじゃない? 山田さんも上司の受けが悪いと、出世もままならないんじゃないかなー。</div>
+            <div class="line"><span class="speaker">B：</span>そうか。じゃ、俺も気をつけなきゃな。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">24（脱サラ・サラリーマン人生）</div>
+            <div class="line"><span class="speaker">A：</span>どんなに頑張ってもしょせん一介のサラリーマンなんだから、億万長者になれるわけないよな。</div>
+            <div class="line"><span class="speaker">B：</span>どうして今さらそんなこと?</div>
+            <div class="line"><span class="speaker">A：</span>だってさ、毎日満員電車に揺られて会社に行って、クタクタになるまで働いて、夜は家に帰って寝るだけ。しかも、給料も一向に上がらない、出世も無理ときたら、この先望みなんて持てるわけないよ。</div>
+            <div class="line"><span class="speaker">B：</span>そんなこと言わないでくれよ。なんだか俺まで悲しくなってくるよ。</div>
+            <div class="line"><span class="speaker">A：</span>あ〜あ、何のために働き蜂みたいに毎日働いてんのかなー。いっそ脱サラでもしようかなー。</div>
+            <div class="line"><span class="speaker">B：</span>そんな弱気なこと言って、自分はだめだってはなから諦めちゃだめだよ。平凡なサラリーマンでも、真面目にコツコツ働いて認められた人はごまんといるんじゃないか。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">25（報告会・10月）</div>
+            <div class="line"><span class="speaker">A：</span>次回の報告会だけど、10月頃に持ってこようと思うんだけど…。どう思う?</div>
+            <div class="line"><span class="speaker">B：</span>10月ねー。</div>
+            <div class="line"><span class="speaker">A：</span>新入社員のモチベーションをあげる仕掛けになると思うんだよね。ちょうど今回と2カ月離れてるし。</div>
+            <div class="line"><span class="speaker">B：</span>そうだね。9月は中間決算が控えているから、10月ごろが確かにいいかもね。</div>
+            <div class="line"><span class="speaker">A：</span>じゃ、そういうことで。具体的な日時は、またいくつか候補日を挙げるから、そこから考えよう。</div>
+            <div class="line"><span class="speaker">B：</span>そうだな。とりあえず、10月予定とだけ知らせておこう。メールしとくよ。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">26（打ち合わせ・14日）</div>
+            <div class="line"><span class="speaker">A：</span>次回の打ち合わせは、来週の火曜か水曜あたりでどうですか?</div>
+            <div class="line"><span class="speaker">B：</span>どちらかと言うと、14日のほうが都合がいいですね。</div>
+            <div class="line"><span class="speaker">A：</span>14日の火曜日ですね、わかりました。</div>
+            <div class="line"><span class="speaker">B：</span>じゃ、14日の2時3時ということで。</div>
+            <div class="line"><span class="speaker">A：</span>はい。じゃ、部屋、押さえときます。</div>
+            <div class="line"><span class="speaker">B：</span>お願いします。それから今年度の経費、概数でいいので出しといてください。</div>
+            <div class="line"><span class="speaker">A：</span>はい、わかりました。今日中にやっときます。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unit 6 -->
+    <div class="unit-block">
+      <div class="unit-header">
+        <span class="disk-tag d2-tag">DISK 2</span>
+        <h3>Unit 6　上司や部下との会話</h3>
+        <span class="track-tag">DISK 2 Track 12〜</span>
+      </div>
+      <div style="padding:.7rem 1.2rem; font-size:.85rem; color:#666; background:#fafafa; border-bottom:1px solid #eee;">
+        職場での上下関係のある会話。敬語・丁寧語の使い分けが重要。
+      </div>
+      <!-- Section 1 -->
+      <div class="section-block">
+        <div class="section-label mid-label">セクション 1　中級レベル　（DISK 2 Track 12〜14）</div>
+        <div class="dialogues">
+          <div class="dialogue mid">
+            <div class="dialogue-num">1（会議資料・簡潔に）</div>
+            <div class="line"><span class="speaker">A：</span>3時までに会議の資料を提出してください。</div>
+            <div class="line"><span class="speaker">B：</span>はい、了解しました。</div>
+            <div class="line"><span class="speaker">A：</span>簡潔にまとめてくださいね。</div>
+            <div class="line"><span class="speaker">B：</span>はい、わかりました。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">2（中本さん発熱・遅番）</div>
+            <div class="line"><span class="speaker">A：</span>あれ、今日、中本さんも福田さんもお休み?</div>
+            <div class="line"><span class="speaker">B：</span>中本さんは発熱、福田さんは遅番です。</div>
+            <div class="line"><span class="speaker">A：</span>発熱? そうなんだ。</div>
+            <div class="line"><span class="speaker">B：</span>昨日、咳してたから悪化したのかもしれませんね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">3（人身事故・振替輸送）</div>
+            <div class="line"><span class="speaker">A：</span>人身事故で電車が止まってるみたいですよ。</div>
+            <div class="line"><span class="speaker">B：</span>え〜、あと30分で着かなきゃいけないのに、それじゃ2時に着かないよ。</div>
+            <div class="line"><span class="speaker">A：</span>地下鉄で振替輸送をしているようですよ。ちょっと時間がかかるけど、それで行きましょうか。</div>
+            <div class="line"><span class="speaker">B：</span>うーん、それしかないね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">4（出産予定日・立ち合い）</div>
+            <div class="line"><span class="speaker">A：</span>今日から8月だね。奥さんの出産も近いんじゃない?</div>
+            <div class="line"><span class="speaker">B：</span>ええ。今月の14日、出産予定日なんです。</div>
+            <div class="line"><span class="speaker">A：</span>あ、そう。奥さん暑いのに大変だね。木村さん立ち会うの?</div>
+            <div class="line"><span class="speaker">B：</span>ええ、できれば。予定日の前後はお休みをいただいてるんです。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">5（出張旅費・申請書）</div>
+            <div class="line"><span class="speaker">A：</span>あ〜、出張旅費の申請書、書くの忘れてた。</div>
+            <div class="line"><span class="speaker">B：</span>じゃ、私が書いときましょうか?</div>
+            <div class="line"><span class="speaker">A：</span>悪いね、頼むよ。ついでに経理課にまわしといてくれないか。</div>
+            <div class="line"><span class="speaker">B：</span>え〜、相変わらず人使いが荒いですね。</div>
+            <div class="line"><span class="speaker">A：</span>そんなこと言わないで、頼んだよ。</div>
+            <div class="line"><span class="speaker">B：</span>わかりました。その代わり、明日の課の飲み会、絶対参加してくださいね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">6（スピーチ原稿）</div>
+            <div class="line"><span class="speaker">A：</span>何書いてるんだ?</div>
+            <div class="line"><span class="speaker">B：</span>スピーチの原稿なんです。結婚式の二次会でスピーチ頼まれちゃって。</div>
+            <div class="line"><span class="speaker">A：</span>あ、吉岡君の? 今週末だったね、確か。</div>
+            <div class="line"><span class="speaker">B：</span>はい。余興で歌、歌うぐらいにしたかったんですけどねー。</div>
+            <div class="line"><span class="speaker">A：</span>そういえば、最近はあんまり結婚式で歌聞かないね。</div>
+            <div class="line"><span class="speaker">B：</span>そうですよね。昔はカラオケ大会みたいなところがありましたけどね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">7（沖縄出張報告）</div>
+            <div class="line"><span class="speaker">A：</span>高木君、沖縄どうだった?</div>
+            <div class="line"><span class="speaker">B：</span>はい、予定通り行きました。先方の部長ともお会いできて、いろいろお話をうかがってきました。</div>
+            <div class="line"><span class="speaker">A：</span>あ、そう。明日までに報告書出しといて。ラフなのでいいから。</div>
+            <div class="line"><span class="speaker">B：</span>はい、大丈夫です。</div>
+            <div class="line"><span class="speaker">A：</span>それと、来週の打ち合わせで検討しなきゃいけないことをいくつかピックアップしといて。箇条書きで。</div>
+            <div class="line"><span class="speaker">B：</span>はい、わかりました。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">8（ほうれんそう）</div>
+            <div class="line"><span class="speaker">A：</span>田中君、「ほうれんそう。」ってわかってる?</div>
+            <div class="line"><span class="speaker">B：</span>ええ、あの野菜のほうれん草のことですよね。</div>
+            <div class="line"><span class="speaker">A：</span>違う違う、会社で使う「ほうれんそう」だよ。</div>
+            <div class="line"><span class="speaker">B：</span>あ、「ほう」は「報告」、「れん」は「連絡」、「そう」は「相談」のことですね。</div>
+            <div class="line"><span class="speaker">A：</span>わかってるんだったら、いつもそのようにしてほしいもんだね。</div>
+            <div class="line"><span class="speaker">B：</span>あっ、すみません。気をつけます。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">9（納品日程）</div>
+            <div class="line"><span class="speaker">A：</span>この作業ペースじゃ、2日の納品は無理じゃないですか?</div>
+            <div class="line"><span class="speaker">B：</span>う~ん。でも、先方には大丈夫だって言っちゃったんだろ?</div>
+            <div class="line"><span class="speaker">A：</span>ええ、まー。</div>
+            <div class="line"><span class="speaker">B：</span>できるって言ったからにはやらないとな。この先の信用に関わるし。</div>
+            <div class="line"><span class="speaker">A：</span>ええ、それはわかるんですが...。</div>
+            <div class="line"><span class="speaker">B：</span>ちょっと、作業日程見直してみようよ。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">10（販促パンフ見積もり）</div>
+            <div class="line"><span class="speaker">A：</span>販促用のパンフの印刷、何社からか相見積もり取りましょうか。</div>
+            <div class="line"><span class="speaker">B：</span>そうだね、頼むよ。</div>
+            <div class="line"><span class="speaker">A：</span>業者にも伝えて、意識し合ってもらったほうがいいですよね。</div>
+            <div class="line"><span class="speaker">B：</span>うん。せっかく作るんだから、納得できるものにしないとね。</div>
+            <div class="line"><span class="speaker">A：</span>はい、それはもちろんです。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">11（佐々木部長の電話）</div>
+            <div class="line"><span class="speaker">A：</span>課長、先ほど日本商事の佐々木部長からお電話がありました。また一時間後にかけなおすとのことでした。</div>
+            <div class="line"><span class="speaker">B：</span>佐々木部長? ついさっき電話もらったばっかりだけどなー。なんか用件言ってなかった?</div>
+            <div class="line"><span class="speaker">A：</span>いいえ、何も。</div>
+            <div class="line"><span class="speaker">B：</span>じゃ、電話してみようかな。</div>
+            <div class="line"><span class="speaker">A：</span>あ、こちらから折り返しましょうかと言ったんですが、これから会議に入るのでとおっしゃってました。</div>
+            <div class="line"><span class="speaker">B：</span>あ、そう。じゃー、しかたないね。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="section-block">
+        <div class="section-label adv-label">セクション 2　上級レベル　（DISK 2 Track 15〜19）</div>
+        <div class="dialogues">
+          <div class="dialogue adv">
+            <div class="dialogue-num">1（結婚祝い・コーヒーカップ）</div>
+            <div class="line"><span class="speaker">A：</span>友達の結婚祝、何がいいと思う?</div>
+            <div class="line"><span class="speaker">B：</span>コーヒーカップなんて、どうですか?</div>
+            <div class="line"><span class="speaker">A：</span>うーん、ちょっと平凡じゃないか?</div>
+            <div class="line"><span class="speaker">B：</span>じゃー、コーヒー豆とセットにしてあげたらどうでしょう。</div>
+            <div class="line"><span class="speaker">A：</span>いやー、豆にも好みがあるしなー。難しいもんだね、お祝いも。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">2（パソコントラブル・ウイルス）</div>
+            <div class="line"><span class="speaker">A：</span>最近、うちのパソコン調子が悪くって...。ウイルスにでも感染したのかな・・・。</div>
+            <div class="line"><span class="speaker">B：</span>どんな状況なんですか?</div>
+            <div class="line"><span class="speaker">A：</span>うん、立ち上げると同時に意味不明なメッセージが次から次へと出てくるんだよ。</div>
+            <div class="line"><span class="speaker">B：</span>変なメールを開けたりしませんでしたか? とにかくプロバイダーに問い合わせてみたほうがいいですよ。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">3（プロジェクト・一心同体）</div>
+            <div class="line"><span class="speaker">A：</span>さー、大変だぞ。今度のプロジェクトは失敗するわけにはいかないからな。</div>
+            <div class="line"><span class="speaker">B：</span>はい。私たちも成功に向けて全力を尽くして頑張ります。</div>
+            <div class="line"><span class="speaker">A：</span>頼むよ。チームは一心同体って言うからね。</div>
+            <div class="line"><span class="speaker">B：</span>はい。微力ながら、精一杯やらせていただきます。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">4（奥様は鬼・地獄耳）</div>
+            <div class="line"><span class="speaker">A：</span>奥様は、とても優しい方だそうですね。</div>
+            <div class="line"><span class="speaker">B：</span>外づらがいいんだよ。うちじゃ鬼よりこわいよ。</div>
+            <div class="line"><span class="speaker">A：</span>へ~、いいんですか? そんなことおっしゃって。</div>
+            <div class="line"><span class="speaker">B：</span>ここだけの話にしといてくれよ。とにかく地獄耳なんだから。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">5（家庭円満の秘訣）</div>
+            <div class="line"><span class="speaker">A：</span>部長、家庭円満の秘訣は何ですか?</div>
+            <div class="line"><span class="speaker">B：</span>そりゃー、一に我慢、二に我慢、三四がなくて五に我慢だよ。</div>
+            <div class="line"><span class="speaker">A：</span>ヘー、理解のある奥様に見えますけどねー。</div>
+            <div class="line"><span class="speaker">B：</span>内と外では大違いってね。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">6（昇進乾杯）</div>
+            <div class="line"><span class="speaker">A：</span>さー、君たち! 今夜は僕のおごりだ。おおいに飲んでくれ。</div>
+            <div class="line"><span class="speaker">B：</span>部長! ご昇進、おめでとうございます。</div>
+            <div class="line"><span class="speaker">A：</span>ありがとう。君たちにも、また一緒に頑張ってもらうからね。</div>
+            <div class="line"><span class="speaker">B：</span>もちろんです。では、部長のますますのご活躍を願って、乾杯!</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">7（迅速な判断）</div>
+            <div class="line"><span class="speaker">A：</span>いやー、とっさの判断で早めに切り上げてよかったよ。</div>
+            <div class="line"><span class="speaker">B：</span>迅速かつ適切な判断力がなければ、いいビジネスはできませんからね。</div>
+            <div class="line"><span class="speaker">A：</span>お! 君もたまにはいいことを言うじゃないか。</div>
+            <div class="line"><span class="speaker">B：</span>いえいえ、日頃の課長のご指導の賜物ですよ。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">8（折り入ってご相談）</div>
+            <div class="line"><span class="speaker">A：</span>あのー、折り入ってご相談したいことがあるんですが。</div>
+            <div class="line"><span class="speaker">B：</span>あー、木村さん。今ちょっと手が離せないんだけど、ちょっと待ってくれる?</div>
+            <div class="line"><span class="speaker">A：</span>はい。じゃ、あちらで待たせていただきます。</div>
+            <div class="line"><span class="speaker">B：</span>あ、悪いね。電話一本入れたらすぐ行くから。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">9（先方からの見積もり）</div>
+            <div class="line"><span class="speaker">A：</span>先方から見積もりが来ました。</div>
+            <div class="line"><span class="speaker">B：</span>あ、どうだった?</div>
+            <div class="line"><span class="speaker">A：</span>高すぎて話になりません。こっちの予算も言っといたんですけどね。</div>
+            <div class="line"><span class="speaker">B：</span>もう一度、来てもらって相談してみるか。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">10（書類をシュレッダー）</div>
+            <div class="line"><span class="speaker">A：</span>この書類をシュレッダーにかけてください。</div>
+            <div class="line"><span class="speaker">B：</span>はい、全部ですね。</div>
+            <div class="line"><span class="speaker">A：</span>いや、個人名の出てるとこだけでいいよ。</div>
+            <div class="line"><span class="speaker">B：</span>はい。わかりました。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">11（税関からの呼び出し）</div>
+            <div class="line"><span class="speaker">A：</span>佐藤、税関から呼び出しが来てるぞ。</div>
+            <div class="line"><span class="speaker">B：</span>え? 呼び出しの理由は何ですか?</div>
+            <div class="line"><span class="speaker">A：</span>何でも、通関書類が不足していたようだ。</div>
+            <div class="line"><span class="speaker">B：</span>おかしいなー。何回もチェックしたはずなんですけど...。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">12（明日から出張）</div>
+            <div class="line"><span class="speaker">A：</span>いやー、明日から出張になっちゃったよ。</div>
+            <div class="line"><span class="speaker">B：</span>え、それは急ですね。何かあったんですか?</div>
+            <div class="line"><span class="speaker">A：</span>うん、工場の電気系統にトラブルが発生したみたいなんだ。</div>
+            <div class="line"><span class="speaker">B：</span>え~、それでわざわざ部長がいらっしゃらなきゃいけないんですか。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">13（ミーティング時間変更）</div>
+            <div class="line"><span class="speaker">A：</span>あれ? ミーティングは午後3時からじゃなかったっけ。</div>
+            <div class="line"><span class="speaker">B：</span>1時に変更になったこと、お伝えしてあったと思いますが・・・。</div>
+            <div class="line"><span class="speaker">A：</span>うっかりしてた。てっきり3時だと思ってた。</div>
+            <div class="line"><span class="speaker">B：</span>そうでしたか。資料を用意しておきましたので、ご覧になっておいてください。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">14（煙草・一服）</div>
+            <div class="line"><span class="speaker">A：</span>あの、部長、明日の出張のことなんですけど・・・。</div>
+            <div class="line"><span class="speaker">B：</span>あ、ちょっと一服してからでいい?</div>
+            <div class="line"><span class="speaker">A：</span>あ、じゃ、僕もご一緒させてください。</div>
+            <div class="line"><span class="speaker">B：</span>あれ? タバコ吸うんだっけ。吸ってるとこ見たことなかったなー。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">15（企画案・締め切り）</div>
+            <div class="line"><span class="speaker">A：</span>山田さん、先週頼んでおいた企画案、持ってきて。</div>
+            <div class="line"><span class="speaker">B：</span>それが、なかなか案がまとまらなくて、まだできてないんです。</div>
+            <div class="line"><span class="speaker">A：</span>え、今できてないと困るな。現況報告しといてくれないと。締め切りまでに間に合う?</div>
+            <div class="line"><span class="speaker">B：</span>はい、締め切りまでには。今、資料をお持ちします。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">16（ソウル支社へ異動）</div>
+            <div class="line"><span class="speaker">A：</span>部長、長い間たいへんお世話になり、ありがとうございました。</div>
+            <div class="line"><span class="speaker">B：</span>いやいや、こちらこそ。君にはいろいろ頑張ってもらって感謝してますよ。</div>
+            <div class="line"><span class="speaker">A：</span>ソウル支社に行っても頑張ります。もし部長がソウルにお越しの際はどうぞご連絡ください。</div>
+            <div class="line"><span class="speaker">B：</span>うん。そっちに行くことがあったらぜひ。じゃ、体に気をつけて。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">17（複合テーマパーク計画）</div>
+            <div class="line"><span class="speaker">A：</span>来年、建設を予定しているホテル付き複合テーマパークですが、国内外から年間200万人の利用が見込まれています。</div>
+            <div class="line"><span class="speaker">B：</span>そうか? その概算、ちょっと楽観的すぎるんじゃないか。</div>
+            <div class="line"><span class="speaker">A：</span>いえ、2015年完成の新空港の建設により、大幅な集客数の増加が可能かと思われます。</div>
+            <div class="line"><span class="speaker">B：</span>じゃ、開発計画の詳細を分析して、文書を提出してくれないか。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">18（予算オーバー・稟議書）</div>
+            <div class="line"><span class="speaker">A：</span>課長、今回も予算がオーバーしそうですが・・・。</div>
+            <div class="line"><span class="speaker">B：</span>じゃー、その旨、稟議書書いてまわしといてくれないか。</div>
+            <div class="line"><span class="speaker">A：</span>はい。文面は前回同様でよろしいですか?</div>
+            <div class="line"><span class="speaker">B：</span>うん、金額のところだけ書き直せばいいだろう。</div>
+            <div class="line"><span class="speaker">A：</span>金額はどのくらいにしておきますか?</div>
+            <div class="line"><span class="speaker">B：</span>前回の2割増しってとこだろう。ちょっと金額出してみて。</div>
+          </div>
+          <div class="dialogue adv">
+            <div class="dialogue-num">19（原料未着・タイへ出張）</div>
+            <div class="line"><span class="speaker">A：</span>え、原料がまだ届いてないって? 鈴木、相手先に電話入れて、とりあえず商品の納入が遅れるかもしれないって謝っといてくれ。</div>
+            <div class="line"><span class="speaker">B：</span>はい、わかりました。[電話後] 課長、これ以上の遅れは困るということですが...。</div>
+            <div class="line"><span class="speaker">A：</span>そうか。弱ったな。じゃー、鈴木、今すぐ確認しにタイに飛んでくれ。</div>
+            <div class="line"><span class="speaker">B：</span>課長、出張となりますと、いろいろ準備が必要でして...。</div>
+            <div class="line"><span class="speaker">A：</span>そんな悠長なこと言ってられないぞ。一刻を争うんだ。</div>
+            <div class="line"><span class="speaker">B：</span>はー、そうはおっしゃいましても・・・。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unit 7 -->
+    <div class="unit-block">
+      <div class="unit-header">
+        <span class="disk-tag d2-tag">DISK 2</span>
+        <h3>Unit 7　社外の人や面接官などとの会話</h3>
+        <span class="track-tag">DISK 2 Track 19〜</span>
+      </div>
+      <div style="padding:.7rem 1.2rem; font-size:.85rem; color:#666; background:#fafafa; border-bottom:1px solid #eee;">
+        社外の取引先・面接官など、初対面や改まった場での会話。最も丁寧な日本語が求められる。
+      </div>
+      <div class="section-block">
+        <div class="section-label mid-label">セクション 1　中級レベル　（DISK 2 Track 19〜20）</div>
+        <div class="dialogues">
+          <div class="dialogue mid">
+            <div class="dialogue-num">1（山田さんにお目にかかりたい）</div>
+            <div class="line"><span class="speaker">A：</span>あのー、営業部の山田さんにお目にかかりたいのですが。</div>
+            <div class="line"><span class="speaker">B：</span>失礼ですが、お名前は?</div>
+            <div class="line"><span class="speaker">A：</span>はい、チャンと申します。</div>
+            <div class="line"><span class="speaker">B：</span>少々お待ちください。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">2（飲み会続きで胃の調子が悪い）</div>
+            <div class="line"><span class="speaker">A：</span>最近、ちょっと胃の調子が悪くて困ってます。</div>
+            <div class="line"><span class="speaker">B：</span>あら、飲み会続きでしたからねー。</div>
+            <div class="line"><span class="speaker">A：</span>ええ、今週で3日目ですよ。</div>
+            <div class="line"><span class="speaker">B：</span>ほどほどにしないと、体に毒ですよ。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">3（アルコール控えてる・酒は百薬の長）</div>
+            <div class="line"><span class="speaker">A：</span>最近、アルコールを控えてるんですか?</div>
+            <div class="line"><span class="speaker">B：</span>ええ、まー、女房に止められちゃって。</div>
+            <div class="line"><span class="speaker">A：</span>そうですか。でも、酒は百薬の長って言うじゃないですか。</div>
+            <div class="line"><span class="speaker">B：</span>まあね。それはよくわかってるんですけどね。</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">4（カラオケ・秋田さん）</div>
+            <div class="line"><span class="speaker">A：</span>秋田さん、一曲も歌ってないじゃないですか。</div>
+            <div class="line"><span class="speaker">B：</span>いやー、カラオケはちょっと苦手で。</div>
+            <div class="line"><span class="speaker">A：</span>そんなこと言わないで、一曲どうぞ。</div>
+            <div class="line"><span class="speaker">B：</span>じゃー、音程が外れてもいいですか?</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">5（職業紹介所・IT関連・インターンシップ）</div>
+            <div class="line"><span class="speaker">A：</span>どのような職種をお探しですか?</div>
+            <div class="line"><span class="speaker">B：</span>IT関連の仕事を探しているんですが。</div>
+            <div class="line"><span class="speaker">A：</span>IT関連ですね。インターンシップなどはいかがですか。</div>
+            <div class="line"><span class="speaker">B：</span>インターンシップは何ヶ月ぐらいですか?</div>
+          </div>
+          <div class="dialogue mid">
+            <div class="dialogue-num">6（明けましておめでとう・協同プロジェクト）</div>
+            <div class="line"><span class="speaker">A：</span>明けましておめでとうございます。今年もよろしくお願いします。</div>
+            <div class="line"><span class="speaker">B：</span>こちらこそ、よろしくお願いいたします。</div>
+            <div class="line"><span class="speaker">A：</span>今年も御社との協同プロジェクトをよろしくお願いいたします。</div>
+            <div class="line"><span class="speaker">B：</span>はい、今年もお互い頑張りましょう。</div>
+          </div>
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label adv-label">セクション 2　上級レベル</div>
+        <p style="font-size:.85rem;color:#888;padding:.3rem 0;">※ページ 140〜147 収録。</p>
+      </div>
+    </div>
+
+    <!-- Unit 8 -->
+    <div class="unit-block">
+      <div class="unit-header">
+        <span class="disk-tag d2-tag">DISK 2</span>
+        <h3>Unit 8　長い会話・スピーチなど</h3>
+        <span class="track-tag">DISK 2 Track 24〜</span>
+      </div>
+      <div style="padding:.7rem 1.2rem; font-size:.85rem; color:#666; background:#fafafa; border-bottom:1px solid #eee;">
+        長い会話・スピーチ・プレゼンテーションなど8つのセクション。セクション間に難易度の差はない。自分で話したいテーマを適宜選択して練習する。
+      </div>
+      <div class="section-block">
+        <div class="dialogues">
+          <div class="u8-section">
+            <h5>Section 1　クレーム</h5>
+            <p>苦情・クレーム対応の長い会話。感情コントロールと丁寧な表現が鍵。（ページ 150〜151）</p>
+          </div>
+          <div class="u8-section">
+            <h5>Section 2　恋愛トーク</h5>
+            <p>友人同士の恋愛相談。砕けた表現・感情表現が豊富。（ページ 152〜153）</p>
+          </div>
+          <div class="u8-section">
+            <h5>Section 3　野球観戦</h5>
+            <p>野球観戦中の会話。スポーツ用語・興奮した話し方の練習。（ページ 154〜155）</p>
+          </div>
+          <div class="u8-section">
+            <h5>Section 4　上司と部下</h5>
+            <p>上下関係のある長い会話。職場でのやりとりを深く練習。（ページ 156〜157）</p>
+          </div>
+          <div class="u8-section">
+            <h5>Section 5　就職面接</h5>
+            <p>面接官と応募者のやりとり。敬語・自己PR・質問応答の練習。（ページ 158〜159）</p>
+          </div>
+          <div class="u8-section">
+            <h5>Section 6　テレフォンショッピング</h5>
+            <p>電話越しの購入手続き会話。明瞭な発音・確認表現が重要。（ページ 160〜161）</p>
+          </div>
+          <div class="u8-section">
+            <h5>Section 7　結婚式新郎のスピーチ</h5>
+            <p>披露宴でのスピーチ。フォーマルで感情的な一人語り。自分のスピーチとして意識して練習。（ページ 162〜163）</p>
+          </div>
+          <div class="u8-section">
+            <h5>Section 8　プレゼンテーション</h5>
+            <p>ビジネスプレゼンのスピーチ。論理的な構成・明瞭な発音の練習。（ページ 164〜165）</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 本書の特徴 -->
+  <section class="block" id="features">
+    <h2>本書の特徴</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>🗣 バリエーション豊かな自然な会話</h4>
+        <ul>
+          <li>フォーマルな会話から友人・同僚との肩肘を張らない会話まで幅広く収録</li>
+          <li>日本社会や日本人と接する中で出会う場面を意識した内容</li>
+          <li>ウィットにとんだ会話が多く、楽しく学べる</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h4>📊 親密度別の会話配置（Unit 1〜7）</h4>
+        <ul>
+          <li>Unit 1：最も親しい関係（家族・夫婦・恋人）</li>
+          <li>Unit 2：親しい友人</li>
+          <li>Unit 3：知人・近所の人</li>
+          <li>Unit 4：サービス業（医者・店員）</li>
+          <li>Unit 5：同僚</li>
+          <li>Unit 6：上司・部下</li>
+          <li>Unit 7：社外・面接官（最もフォーマル）</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h4>📝 表記上の特徴</h4>
+        <ul>
+          <li>「ー」…長く伸ばした音</li>
+          <li>「〜」…感情が揺れている音（疑い・不満・驚き等）</li>
+          <li>口語に近い縮約形・音便を積極採用（例：とっちゃ、そっか、わかんない）</li>
+          <li>電球マーク付きの言葉には各ユニット末尾に解説あり</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h4>🏫 教室活動の例</h4>
+        <ul>
+          <li>ご指名シャドーイング（教師が次々に指名）</li>
+          <li>イヤフォン・シャドーイング</li>
+          <li>なりきりシャドーイング（コンテスト形式）</li>
+          <li>ディレイド・シャドーイング（1秒の遅延）</li>
+          <li>リテンション・ディクテーション・受け答えドリルなど</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  できる Shadowing 日本語を話そう 中〜上級編　©2014 Hitoshi Saito, Michiko Fukasawa, et al. / くろしお出版<br>
+  本ページはシャドーイング練習補助資料として作成しました。
+</footer>
+
+</body>
+</html>
